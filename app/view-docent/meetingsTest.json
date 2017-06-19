@@ -1,0 +1,107 @@
+[
+  {
+    "id":"1",
+    "start":"2017-03-01 14:00:00",
+    "end":"2017-03-01 15:00:00",
+    "slots":"3",
+    "max_participants":"0",
+    "email_notification_docent":"true",
+    "title":"Testmeeting1",
+    "description_public":"Halo i bims 1 Testmiedgn!!1",
+    "description_private":"leeel penis",
+    "room":"FC102",
+    "last_enrollment":"2017-02-28 18:00:00",
+    "cancelled":"false",
+    "participants_count":"1",
+    "participating_students":
+    [
+      {
+        "id": "1",
+        "firstname": "Max",
+        "lastname": "Musterstudent",
+        "slot_number": "2",
+        "start":"2017-03-01 14:20:00",
+        "end":"2017-03-01 14:39:00"
+      }
+    ],
+    "has_passed":"true"
+  },
+  {
+    "id": "2",
+    "start":"2017-03-08 14:00:00",
+    "end":"2017-03-08 15:00:00",
+    "slots": "3",
+    "max_participants": "0",
+    "email_notification_docent": "true",
+    "title": "Testmeeting2",
+    "description_public": "Halo i bims 2 Testmiedgn!!1",
+    "description_private": "leeel penis banane",
+    "room": "FC102",
+    "last_enrollment": "2017-03-07 18:00:00",
+    "cancelled":"false",
+    "participants_count":"0",
+    "participating_students": [{}],
+    "has_passed":"false"
+  },
+  {
+    "id": "3",
+    "start":"2017-03-15 14:00:00",
+    "end":"2017-03-15 15:00:00",
+    "slots": "3",
+    "max_participants": "0",
+    "email_notification_docent": "true",
+    "title": "Testmeeting3",
+    "description_public": "Halo i bims 3 Testmiedgn!!1",
+    "description_private": "leeel penis banane",
+    "room": "FC102",
+    "last_enrollment": "2017-03-14 18:00:00",
+    "cancelled":"false",
+    "participants_count":"3",
+    "participating_students":
+    [
+      {
+        "id": "2",
+        "firstname": "Dick",
+        "lastname": "O'Cocker",
+        "slot_number": "1",
+        "start":"2017-03-15 14:00:00",
+        "end":"2017-03-15 14:19:00"
+      },
+      {
+        "id":"3",
+        "firstname":"Armando",
+        "lastname":"Fishony",
+        "slot_number":"2",
+        "start":"2017-03-15 14:20:00",
+        "end":"2017-03-15 14:39:00"
+      },
+      {
+        "id":"3",
+        "firstname":"Willibald",
+        "lastname":"Peppschmier",
+        "slot_number":"3",
+        "start":"2017-03-15 14:40:00",
+        "end":"2017-03-15 14:59:00"
+      }
+    ],
+    "has_passed":"false"
+  },
+  {
+    "id": "4",
+    "start":"2017-03-22 14:00:00",
+    "end":"2017-03-22 15:00:00",
+    "slots": "3",
+    "max_participants": "0",
+    "email_notification_docent": "true",
+    "title": "Testmeeting4",
+    "description_public": "Halo i bims 1 Feigrtag!1",
+    "description_private": "leeel penis banane",
+    "room": "FC102",
+    "last_enrollment": "2017-03-21 18:00:00",
+    "cancelled":"true",
+    "participants_count":"0",
+    "participating_students": [{}],
+    "has_passed":"false"
+  }
+]
+

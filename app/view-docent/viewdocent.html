@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de" ng-app="MeetTheProf.viewDocent">
+<head>
+    <meta charset="utf-8">
+    <title>MeetTheProf - Dozent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../../node_modules/designmodo-flat-ui/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- Loading additional Style-Definitions -->
+    <link rel="stylesheet" href="viewdocent.css">
+
+	<!-- Loading Font-Awesome -->
+    <link href="../../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+
+    <!-- Loading Flat UI -->
+    <link href="../../node_modules/designmodo-flat-ui/dist/css/flat-ui.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navHead" class="navbar navbar-inverse" style="border-radius: 0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="MeetTheProf Logo"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <!--<ul class="nav navbar-nav">
+                <form class="navbar navbar-form shaped" style="width: 95%">
+                    <div class="input-group responsive">
+                        <input class="form-control form" placeholder="Suche" type="search" style="border-radius: 6px">
+                        <span class="form-control-feedback fui-search" style="top: 0;"></span>
+                    </div>
+                </form>
+            </ul>-->
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="li-notification"><a href="#"><i class="fa fa-bell-o fa-lg"></i><span class="navbar-new">1</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="meetingContainer" class="container" ng-controller="MeetingsController">
+    <ng-include src="'../templates/templ_meetingpanel.html'"></ng-include>
+</div>
+
+<!-- Button has to be made responsive and changing its color to turquoise on hovering. -->
+<button id="btnAddMeeting" class="btn btn-add" data-toggle="modal" data-target="#creationForm" ng-controller="MeetingsController">
+    <strong>+</strong>
+</button>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style="border-radius: 0">
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-1">
+                    <div class="row">
+                        <div class="panel panel-key" style="background-color: #3498DB">
+                        </div>
+                    </div>
+                    <div class="row row-key" style="color: white;">
+                        niemand angemeldet
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="row">
+                        <div class="panel panel-key" style="background-color: #2ECC71;">
+                        </div>
+                    </div>
+                    <div class="row row-key" style="color: white;">
+                        Teilnehmer angemeldet
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="row">
+                        <div class="panel panel-key" style="background-color: #E67E22;">
+                        </div>
+                    </div>
+                    <div class="row row-key" style="color: white;">
+                        Überarbeitung nötig
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="row">
+                        <div class="panel panel-key" style="background-color: #E74C3C;">
+                        </div>
+                    </div>
+                    <div class="row row-key" style="color: white;">
+                        abgesagt
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="row">
+                        <div class="panel panel-key" style="background-color: #95A5A6;">
+                        </div>
+                    </div>
+                    <div class="row row-key" style="color: white;">
+                        vergangen
+                    </div>
+                </div>
+            </div>
+    </div>
+</nav>
+
+<!-- End of initially visible content -->
+
+<div id="creationForm" class="modal fade" ng-controller="MeetingsController">
+    <ng-include src="'../templates/form_meetingcreation.html'"></ng-include>
+</div>
+
+<div id="editForm" class="modal fade" ng-controller="MeetingsController">
+    <ng-include src="'../templates/form_meetingedit.html'"></ng-include>
+</div>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="../../node_modules/designmodo-flat-ui/dist/js/flat-ui.min.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.min.js"></script> <!-- Needed for ngFabForm -->
+<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script> <!-- Angular extension for easier form handling -->
+<script src="./viewdocent.js"></script> <!-- Angular module code -->
+
+</body>
+</html>

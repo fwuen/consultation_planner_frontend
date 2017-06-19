@@ -1,0 +1,118 @@
+<div class="panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}" ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
+    <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
+        <div class="row">
+            <div class="col-lg-1">
+                <time class="icon">
+                    <strong>{{meetingsViewHandler.getMonthName(meeting.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(meeting.start)}}</span>
+                </time>
+            </div>
+            <div class="col-lg-2">
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} - {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
+            </div>
+            <div class="col-lg-7">
+                {{meeting.title}}
+            </div>
+            <div class="col-lg-1">
+                <i class="fa fa-pencil fa-lg"></i>
+                <i class="fa fa-close fa-lg"></i>
+            </div>
+            <div class="col-lg-1">
+                <i class="fa fa-chevron-down fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div id="meeting{{meeting.id}}" class="panel-collapse collapse">
+        <div class="container-fluid">
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Raum:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.room}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                   Anmeldung nicht mehr möglich ab:
+                </div>
+                <div class="col-lg-6">
+                    {{meetingsViewHandler.getDayMonthYearHourMinutes(meeting.last_enrollment)}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Slots:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.slots}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Maximale Teilnehmerzahl:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.max_participants}}
+                </div>
+            </div>
+            <div class="row ng-hide" style="margin-bottom: 10px; margin-top: 10px;" ng-show="meetingsViewHandler.hasParticipants(meeting)">
+                <div class="col-lg-6">
+                    Angemeldet:
+                </div>
+                <div class="col-lg-6">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Beginn</th>
+                                <th>Ende</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="student in meeting.participating_students track by $index">
+                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.start)}}</td>
+                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.end)}}</td>
+                                <td>{{student.firstname + " " + student.lastname}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Beschreibung(öffentlich):
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.description_public}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Beschreibung(privat):
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.description_private}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Emailbenachrichtigung aktiviert:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.email_notification_docent}}
+                </div>
+            </div>
+            <!-- Not needed since Buttons are now realized via glyphs in panel-header
+            <div class="row">
+                <div class="col-lg-6">
+                    <button class="btn btn-appointment" ng-click="meetingsEventHandler.cancelMeeting(meeting);">Absagen</button>
+                </div>
+                <div class="col-lg-6" style="text-align: right">
+                    <button class="btn btn-appointment" ng-click="meetingsEventHandler.editMeeting(meeting)">Bearbeiten</button>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
