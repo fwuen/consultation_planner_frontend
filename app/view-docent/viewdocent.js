@@ -94,10 +94,7 @@ function meetingsViewHandler() {
             return result;
         },
         hasParticipants: function (aMeeting) {
-            if (parseInt(aMeeting.participants_count) > 0) {
-                return true;
-            }
-            return false;
+            return parseInt(aMeeting.participants_count) > 0;
         },
         getPanelType: function (aMeeting) {
             if (aMeeting.has_passed === "true") {
@@ -124,15 +121,32 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
 }
 
 function creationFormEventHandler() {
+
+    function initDatetimepicker() {
+    $('.datetimepicker').datetimepicker({
+        locale: 'de',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar"
+        }
+    });
+}
+
     return {
         submit: function() {
             return alert("Halo i bims sabmitt");
+        },
+        initCreationForm: function() {
+            initDatetimepicker();
         }
+
     }
 }
 
-function creationFormController($scope, $templateCache, CreationFormEventHandler) {
+function creationFormController($scope, CreationFormEventHandler) {
     $scope.creationFormEventHandler = CreationFormEventHandler;
 
     $scope.newMeeting = {};
+
+    $scope.creationFormEventHandler.initCreationForm();
 }
