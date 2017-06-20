@@ -83,7 +83,7 @@
 /**
  * Navbar
  */
-.navbar-brand  img {
+.navbar-brand img {
     margin-top: -20px;
     max-height: 350%;
     height: 350%;
@@ -93,6 +93,10 @@
 
 .navbar-inverse {
     background-color: #34495E;
+}
+
+.mtp-notification {
+    background-color: #E74C3C;
 }
 
 .panel-key {
