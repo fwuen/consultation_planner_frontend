@@ -6,16 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
-    <link href="../../node_modules/designmodo-flat-ui/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
     <!-- Loading additional Style-Definitions -->
     <link rel="stylesheet" href="viewdocent.css">
 
 	<!-- Loading Font-Awesome -->
     <link href="../../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-
-    <!-- Loading Flat UI -->
-    <link href="../../node_modules/designmodo-flat-ui/dist/css/flat-ui.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <!-- Navbar -->
@@ -38,11 +35,11 @@
                     </div>
                 </form>
             </ul>-->
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-log-out"></span></a></li>
+			<ul class="nav navbar-nav navbar-right ">
+				<li><a class="mtp-icon-link" href="#"><span class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="li-notification"><a href="#"><i class="fa fa-bell-o fa-lg"></i><span class="navbar-new">1</span></a></li>
+                <li class="li-notification"><a class="mtp-icon-link" href="#"><i class="fa fa-bell-o fa-lg mtp-icon"></i><span class="navbar-new mtp-icon">1</span></a></li>
             </ul>
         </div>
     </div>
@@ -50,12 +47,14 @@
 
 
 <div id="meetingContainer" class="container" ng-controller="MeetingsController">
-    <ng-include src="'../templates/templ_meetingpanel.html'"></ng-include>
+    <div id="meetingPanelGroup" class="panel-group">
+        <ng-include src="'../templates/templ_meetingpanel.html'"></ng-include>
+    </div>
 </div>
 
-<!-- Button has to be made responsive and changing its color to turquoise on hovering. -->
-<button id="btnAddMeeting" class="btn btn-add" data-toggle="modal" data-target="#creationForm" ng-controller="MeetingsController">
-    <strong>+</strong>
+<!-- Button for creating a meeting -->
+<button id="btnAddMeeting" class="btn btn-add btn-round mtp-icon-link" data-toggle="modal" data-target="#creationForm" ng-controller="MeetingsController">
+    <i class="fa fa-calendar-plus-o fa-lg mtp-btn-icon"></i>
 </button>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom" style="border-radius: 0">
@@ -121,8 +120,8 @@
 </div>
 
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../bower_components/angular/angular.min.js"></script>
-<script src="../../node_modules/designmodo-flat-ui/dist/js/flat-ui.min.js"></script>
 <script src="../bower_components/angular-messages/angular-messages.min.js"></script> <!-- Required for ngFabForm -->
 <script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script> <!-- Angular extension for easier form handling -->
 <script src="./viewdocent.js"></script> <!-- Angular module code -->

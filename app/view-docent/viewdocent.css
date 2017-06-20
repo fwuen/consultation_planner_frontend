@@ -15,49 +15,83 @@
     }
 }
 
+/**
+ * MeetingPanel
+ */
 .panel-no-participants {
     color: white;
     font-size: 20px;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #3498DB;
 }
 
 .panel-participants {
     color: white;
     font-size: 20px;
     padding: 10px;
-    background-color: #2ecc71;
+    background-color: #2ECC71;
 }
 
 .panel-action-req {
     color: white;
     font-size: 20px;
     padding: 10px;
-    background-color: #e67e22;
+    background-color: #E67E22;
 }
 
 .panel-cancelled {
     color: white;
     font-size: 20px;
     padding: 10px;
-    background-color: #e74c3c;
+    background-color: #E74C3C;
 }
 
 .panel-passed {
     color: white;
     font-size: 20px;
     padding: 10px;
-    background-color: #95a5a6;
+    background-color: #95A5A6;
 }
 
-.appointment-symbol {
-    width: 30px;
-    position: relative;
-    margin-right: 10px;
-    margin-left: 10px
+/**
+ * Button CreateMeeting
+ */
+.btn-round {
+    border-radius: 50%!important;
 }
 
-.btn-appointment {
+.btn-add {
+    height: 70px;
+    width: 70px;
+    bottom: 70px;
+    right: 20px;
+    text-align: center;
+    position: fixed;
+    background-color: #34495E;
+    color: white;
+}
+
+.btn-add i {
+    font-size: 30px !important;
+}
+
+.btn-add:active,
+.btn-add:focus {
+    outline: none !important;
+}
+
+/**
+ * Navbar
+ */
+.navbar-brand  img {
+    margin-top: -20px;
+    max-height: 350%;
+    height: 350%;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+.navbar-inverse {
     background-color: #34495E;
 }
 
@@ -72,41 +106,48 @@
     border-radius: 0;
 }
 
-.row.row-key{
+.row .row-key{
     text-align: center;
     font-size: 13px;
     line-height: 1.0;
     margin-bottom: 5px;
 }
 
-.btn-add {
-    height: 70px;
-    width: 70px;
-    border-radius: 50%!important;
-    bottom: 70px;
-    right: 20px;
-    color: #fff;
-    background-color: #34495E;
-    font-size: 60px!important;
-    text-align: center;
-    position: fixed;
+/**
+ * Icons
+ */
+.mtp-icon,
+.mtp-panel-icon,
+.mtp-btn-icon {
+    color: white;
 }
 
-.btn-add strong {
-    position: relative;
-    top: -18px;
+.mtp-icon-link:hover .mtp-icon{
+    color: #1ABC9C;
 }
 
-.li-notification {
-	margin-right:20px;
+.mtp-icon-link .mtp-icon {
+    font-size: 20px;
 }
 
-.navbar-brand > img {
-    margin-top: -25px;
-    max-height: 300%;
-    height: 300%;
-    -o-object-fit: contain;
-    object-fit: contain;
+.btn-add:hover i {
+    color: #1ABC9C;
+}
+
+.panel-passed a:hover i {
+    color: #7F8C8D !important;
+}
+
+.panel-no-participants a:hover i {
+    color: #2980B9 !important;
+}
+
+.panel-participants a:hover i {
+    color: #27AE60 !important;
+}
+
+.panel-cancelled a:hover i {
+    color: #C0392B;
 }
 
 /**
@@ -158,8 +199,4 @@ time.icon span
     letter-spacing: -0.05em;
     padding-top: 0.8em;
     color: #2f2f2f;
-}
-
-.fa-chevron-down .fa-chevron-up {
-    padding-left: 5px!important;
 }
