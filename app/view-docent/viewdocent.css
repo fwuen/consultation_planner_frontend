@@ -204,3 +204,16 @@ time.icon span
     padding-top: 0.8em;
     color: #2f2f2f;
 }
+
+/**
+ * Other
+ */
+
+.mtp-checkbox {
+    width: 34px;
+    height: 34px;
+}
+
+.mtp-close {
+    font-size: 30px;
+}

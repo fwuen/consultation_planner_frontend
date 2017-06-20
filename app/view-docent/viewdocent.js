@@ -123,14 +123,18 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
 function creationFormEventHandler() {
 
     function initDatetimepicker() {
-    $('.datetimepicker').datetimepicker({
-        locale: 'de',
-        icons: {
-            time: "fa fa-clock-o",
-            date: "fa fa-calendar"
-        }
-    });
-}
+        $('.datetimepicker').datetimepicker({
+            locale: 'de',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar"
+            }
+        });
+    }
+
+    function initTooltips() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
     return {
         submit: function() {
@@ -138,8 +142,8 @@ function creationFormEventHandler() {
         },
         initCreationForm: function() {
             initDatetimepicker();
+            initTooltips();
         }
-
     }
 }
 
