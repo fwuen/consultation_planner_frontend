@@ -1,4 +1,4 @@
-<div class="panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}" ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}" ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
     <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
         <div class="row">
             <div class="col-lg-1">
@@ -103,16 +103,6 @@
                     {{meeting.email_notification_docent}}
                 </div>
             </div>
-            <!-- Not needed since Buttons are now realized via glyphs in panel-header
-            <div class="row">
-                <div class="col-lg-6">
-                    <button class="btn btn-appointment" ng-click="meetingsEventHandler.cancelMeeting(meeting);">Absagen</button>
-                </div>
-                <div class="col-lg-6" style="text-align: right">
-                    <button class="btn btn-appointment" ng-click="meetingsEventHandler.editMeeting(meeting)">Bearbeiten</button>
-                </div>
-            </div>
-            -->
         </div>
     </div>
 </div>

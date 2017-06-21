@@ -18,38 +18,29 @@
 /**
  * MeetingPanel
  */
-.panel-no-participants {
+.mtp-panel {
     color: white;
-    font-size: 20px;
+    font-size: 22px;
     padding: 10px;
+}
+
+.panel-no-participants {
     background-color: #3498DB;
 }
 
 .panel-participants {
-    color: white;
-    font-size: 20px;
-    padding: 10px;
     background-color: #2ECC71;
 }
 
 .panel-action-req {
-    color: white;
-    font-size: 20px;
-    padding: 10px;
     background-color: #E67E22;
 }
 
 .panel-cancelled {
-    color: white;
-    font-size: 20px;
-    padding: 10px;
     background-color: #E74C3C;
 }
 
 .panel-passed {
-    color: white;
-    font-size: 20px;
-    padding: 10px;
     background-color: #95A5A6;
 }
 
@@ -134,6 +125,10 @@
     font-size: 20px;
 }
 
+.mtp-icon-xl {
+    font-size: 40px !important;
+}
+
 .btn-add:hover i {
     color: #1ABC9C;
 }
@@ -206,7 +201,7 @@ time.icon span
 }
 
 /**
- * Other
+ * CreationForm
  */
 
 .mtp-checkbox {
@@ -214,6 +209,7 @@ time.icon span
     height: 34px;
 }
 
-.mtp-close {
-    font-size: 30px;
+.modal-footer, .modal-header {
+    background-color: #34495E;
+    color: #1ABC9C;
 }

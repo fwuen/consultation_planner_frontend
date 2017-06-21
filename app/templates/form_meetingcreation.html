@@ -1,20 +1,28 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close mtp-close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Sprechstunde anlegen</h4>
+            <h2 class="modal-title"><strong>Sprechstunde anlegen</strong></h2>
         </div>
         <div class="modal-body">
             <form class="form-horizontal" ng-controller="CreationFormController" ng-submit="creationFormEventHandler.submit()">
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="title">Titel:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="isSeries">Sprechstundenserie:</label>
+                    <div class="col-lg-9">
+                        <input id="isSeries" class="checkbox-inline mtp-checkbox" type="checkbox" value="isSeries" checked>
+                        <a href="#" data-toggle="tooltip" data-placement="right" title="Soll eine einzelne Sprechstunde oder eine Sprechstundenserie erzeugt werden?">
+                            <div class="badge">?</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="title">Titel:</label>
+                    <div class="col-lg-9">
                         <input id="title" class="form-control" type="text" placeholder="Welchen Titel soll die Sprechstunde tragen?">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="start">Beginn:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="start">Beginn:</label>
+                    <div class="col-lg-9">
                         <div class="input-group date datetimepicker">
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
@@ -24,8 +32,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="end">Ende:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="end">Ende:</label>
+                    <div class="col-lg-9">
                         <div class="input-group date datetimepicker">
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
@@ -35,8 +43,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="last_enrollment">Anmeldeende:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="last_enrollment">Anmeldeende:</label>
+                    <div class="col-lg-9">
                         <div class="input-group date datetimepicker">
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
@@ -46,14 +54,25 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="room">Raum:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="end">Letzte Sprechstunde:</label>
+                    <div class="col-lg-9">
+                        <div class="input-group date datetimepicker">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                            <input id="end" class="form-control" type="text" placeholder="Wann soll die letzte Sprechstunde der Serie stattfinden?">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="room">Raum:</label>
+                    <div class="col-lg-9">
                         <input id="room" class="form-control" type="text" placeholder="In welchem Raum soll die Sprechstunde stattfinden?">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="hasSLots">Sloteinteilung:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="hasSLots">Sloteinteilung:</label>
+                    <div class="col-lg-9">
                         <input id="hasSlots" class="checkbox-inline mtp-checkbox" type="checkbox" value="hasSlots" checked>
                         <a href="#" data-toggle="tooltip" data-placement="right" title="Soll eine Einteilung der Sprechstundendauer in einzeln belegbare Slots stattfinden?">
                             <div class="badge">?</div>
@@ -61,20 +80,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="slots">Slotanzahl:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="slots">Slotanzahl:</label>
+                    <div class="col-lg-9">
                         <input id="slots" class="form-control" type="text" placeholder="In wie viele Slots soll die Sprechstunde aufgeteilt werden?">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="max_participants">Max. Teilnehmer:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="max_participants">Max. Teilnehmer:</label>
+                    <div class="col-lg-9">
                         <input id="max_participants" class="form-control" type="text" placeholder="Wie viele Studierende sollen an der Sprechstunde teilnehmen können?">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="email_notification_docent">Emailnotifikation:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="email_notification_docent">Emailnotifikation:</label>
+                    <div class="col-lg-9">
                         <input id="email_notification_docent" class="checkbox-inline mtp-checkbox" type="checkbox" value="email_notification_docent">
                         <a href="#" data-toggle="tooltip" data-placement="right" title="Soll bei An-/Abmeldungen eine Benachrichtigung per Email erfolgen?">
                             <div class="badge">?</div>
@@ -82,22 +101,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="description_public">Öffentliche Beschreibung:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="description_public">Öffentliche Beschreibung:</label>
+                    <div class="col-lg-9">
                         <textarea id="description_public" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die für alle Benutzer einsehbar ist?"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2" for="description_private">Private Beschreibung:</label>
-                    <div class="col-lg-10">
+                    <label class="control-label col-lg-3" for="description_private">Private Beschreibung:</label>
+                    <div class="col-lg-9">
                         <textarea id="description_private" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die nur für Sie einsehbar ist?"></textarea>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default">Speichern</button>
-            <button type="button" class="btn btn-default">Abbrechen</button>
+            <!--<button type="button" class="btn" data-dismiss="modal"><i class="fa fa-close mtp-icon"></i></button>
+            <button type="submit" class="btn"><i class="fa fa-check mtp-icon"></i></button>-->
+            <a class="mtp-icon-link" type="button" href="#" data-dismiss="modal"><i class="fa fa-close fa-lg mtp-icon mtp-icon-xl"></i></a>
+            <a class="mtp-icon-link" type="submit" href="#"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i></a>
         </div>
     </div>
 </div>
