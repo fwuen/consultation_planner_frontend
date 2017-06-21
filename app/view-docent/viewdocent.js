@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('MeetTheProf.viewDocent', ['ngFabForm', 'ngMessages']);
+angular.module('MeetTheProf.viewDocent', ['ngFabForm', 'ngMessages', 'ngAnimate']);
 
 angular
     .module('MeetTheProf.viewDocent')
     .factory('MeetingsEventHandler', meetingsEventHandler)
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
-    .factory('CreationFormEventHandler', creationFormEventHandler)
     .controller('CreationFormController', creationFormController);
 
 function meetingsEventHandler() {
@@ -120,37 +119,37 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
     });
 }
 
-function creationFormEventHandler() {
+function creationFormController($scope, ngFabForm) {
+    $scope.newMeeting = {};
 
-    function initDatetimepicker() {
-        $('.datetimepicker').datetimepicker({
-            locale: 'de',
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar"
-            }
-        });
+    $scope.hasSlotsClick = hasSlotsClick;
+    $scope.isSeriesClick = isSeriesClick;
+    $scope.submit = submit;
+
+    $scope.fabFormOptions = {
+        validationsTemplate: 'validation.html'
+    };
+
+    initCreationForm();
+
+    function initCreationForm() {
+        initTooltips();
     }
 
     function initTooltips() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    return {
-        submit: function() {
-            return alert("Halo i bims sabmitt");
-        },
-        initCreationForm: function() {
-            initDatetimepicker();
-            initTooltips();
-        }
+    function hasSlotsClick() {
+        $("#slotsGroup").fadeToggle();
+        $("#maxParticipantsGroup").fadeToggle();
     }
-}
 
-function creationFormController($scope, CreationFormEventHandler) {
-    $scope.creationFormEventHandler = CreationFormEventHandler;
+    function isSeriesClick() {
+        $("#endSeriesGroup").fadeToggle();
+    }
 
-    $scope.newMeeting = {};
-
-    $scope.creationFormEventHandler.initCreationForm();
+    function submit() {
+       alert("Halo i bims sabbmitn");
+    }
 }

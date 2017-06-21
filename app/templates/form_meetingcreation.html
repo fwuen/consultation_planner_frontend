@@ -1,100 +1,80 @@
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <div class="modal-content" ng-controller="CreationFormController">
         <div class="modal-header">
             <h2 class="modal-title"><strong>Sprechstunde anlegen</strong></h2>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal" ng-controller="CreationFormController" ng-submit="creationFormEventHandler.submit()">
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="isSeries">Sprechstundenserie:</label>
-                    <div class="col-lg-9">
-                        <input id="isSeries" class="checkbox-inline mtp-checkbox" type="checkbox" value="isSeries" checked>
-                        <a href="#" data-toggle="tooltip" data-placement="right" title="Soll eine einzelne Sprechstunde oder eine Sprechstundenserie erzeugt werden?">
-                            <div class="badge">?</div>
-                        </a>
-                    </div>
-                </div>
+            <form class="form-horizontal" ng-fab-form-options="fabFormOptions" ng-submit="submit()">
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="title">Titel:</label>
                     <div class="col-lg-9">
-                        <input id="title" class="form-control" type="text" placeholder="Welchen Titel soll die Sprechstunde tragen?">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="start">Beginn:</label>
-                    <div class="col-lg-9">
-                        <div class="input-group date datetimepicker">
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                            <input id="start" class="form-control" type="text" placeholder="Wann soll die Sprechstunde beginnen?">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="end">Ende:</label>
-                    <div class="col-lg-9">
-                        <div class="input-group date datetimepicker">
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                            <input id="end" class="form-control" type="text" placeholder="Wann soll die Sprechstunde enden?">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="last_enrollment">Anmeldeende:</label>
-                    <div class="col-lg-9">
-                        <div class="input-group date datetimepicker">
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                            <input id="last_enrollment" class="form-control" type="text" placeholder="Ab wann soll sich niemand mehr an der Sprechstunde anmelden können?">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="end">Letzte Sprechstunde:</label>
-                    <div class="col-lg-9">
-                        <div class="input-group date datetimepicker">
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                            <input id="end" class="form-control" type="text" placeholder="Wann soll die letzte Sprechstunde der Serie stattfinden?">
-                        </div>
+                        <input id="title" class="form-control" type="text" placeholder="Welchen Titel soll die Sprechstunde tragen?" ng-model="newMeeting.title" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="room">Raum:</label>
                     <div class="col-lg-9">
-                        <input id="room" class="form-control" type="text" placeholder="In welchem Raum soll die Sprechstunde stattfinden?">
+                        <input id="room" class="form-control" type="text" placeholder="In welchem Raum soll die Sprechstunde stattfinden?" ng-model="newMeeting.room" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-3" for="hasSLots">Sloteinteilung:</label>
+                    <label class="control-label col-lg-3" for="start">Beginn:</label>
                     <div class="col-lg-9">
-                        <input id="hasSlots" class="checkbox-inline mtp-checkbox" type="checkbox" value="hasSlots" checked>
+                        <input id="start" class="form-control" type="datetime-local" placeholder="Wann soll die Sprechstunde beginnen?" ng-model="newMeeting.start" min="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="end">Ende:</label>
+                    <div class="col-lg-9">
+                        <input id="end" class="form-control" type="datetime-local" placeholder="Wann soll die Sprechstunde enden?" ng-model="newMeeting.end" min="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="last_enrollment">Anmeldeende:</label>
+                    <div class="col-lg-9">
+                        <input id="last_enrollment" class="form-control" type="datetime-local" placeholder="Ab wann soll sich niemand mehr an der Sprechstunde anmelden können?" ng-model="newMeeting.last_enrollment" min="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="isSeries">Sprechstundenserie:</label>
+                    <div class="col-lg-9">
+                        <input id="isSeries" class="checkbox-inline mtp-checkbox mtp-checkbox-series" type="checkbox" value="isSeries" ng-click="isSeriesClick();" checked ng-model="newMeeting.is_series">
+                        <a href="#" data-toggle="tooltip" data-placement="right" title="Soll eine einzelne Sprechstunde oder eine Serie wöchentlicher Sprechstunden erzeugt werden?">
+                            <div class="badge">?</div>
+                        </a>
+                    </div>
+                </div>
+                <div id="endSeriesGroup" class="form-group">
+                    <label class="control-label col-lg-3" for="end_series">Letzte Sprechstunde:</label>
+                    <div class="col-lg-9">
+                        <input id="end_series" class="form-control" type="datetime-local" placeholder="Wann soll die letzte Sprechstunde der Serie stattfinden?" ng-model="newMeeting.end_series" min="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="hasSlots">Sloteinteilung:</label>
+                    <div class="col-lg-9">
+                        <input id="hasSlots" class="checkbox-inline mtp-checkbox" type="checkbox" value="hasSlots" ng-click="hasSlotsClick()" checked ng-model="newMeeting.has_slots">
                         <a href="#" data-toggle="tooltip" data-placement="right" title="Soll eine Einteilung der Sprechstundendauer in einzeln belegbare Slots stattfinden?">
                             <div class="badge">?</div>
                         </a>
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="slotsGroup" class="form-group">
                     <label class="control-label col-lg-3" for="slots">Slotanzahl:</label>
                     <div class="col-lg-9">
-                        <input id="slots" class="form-control" type="text" placeholder="In wie viele Slots soll die Sprechstunde aufgeteilt werden?">
+                        <input id="slots" class="form-control" type="text" placeholder="In wie viele Slots soll die Sprechstunde aufgeteilt werden?" ng-model="newMeeting.slots">
                     </div>
                 </div>
-                <div class="form-group">
+                <div id="maxParticipantsGroup" class="form-group" hidden>
                     <label class="control-label col-lg-3" for="max_participants">Max. Teilnehmer:</label>
                     <div class="col-lg-9">
-                        <input id="max_participants" class="form-control" type="text" placeholder="Wie viele Studierende sollen an der Sprechstunde teilnehmen können?">
+                        <input id="max_participants" class="form-control" type="text" placeholder="Wie viele Studierende sollen an der Sprechstunde teilnehmen können?" ng-model="newMeeting.max_participants">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="email_notification_docent">Emailnotifikation:</label>
                     <div class="col-lg-9">
-                        <input id="email_notification_docent" class="checkbox-inline mtp-checkbox" type="checkbox" value="email_notification_docent">
+                        <input id="email_notification_docent" class="checkbox-inline mtp-checkbox" type="checkbox" value="email_notification_docent" ng-model="newMeeting.email_notification_docent">
                         <a href="#" data-toggle="tooltip" data-placement="right" title="Soll bei An-/Abmeldungen eine Benachrichtigung per Email erfolgen?">
                             <div class="badge">?</div>
                         </a>
@@ -103,22 +83,21 @@
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="description_public">Öffentliche Beschreibung:</label>
                     <div class="col-lg-9">
-                        <textarea id="description_public" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die für alle Benutzer einsehbar ist?"></textarea>
+                        <textarea id="description_public" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die für alle Benutzer einsehbar ist?" ng-model="newMeeting.description_public"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="description_private">Private Beschreibung:</label>
                     <div class="col-lg-9">
-                        <textarea id="description_private" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die nur für Sie einsehbar ist?"></textarea>
+                        <textarea id="description_private" class="form-control" rows="5" placeholder="Soll eine Beschreibung verfasst werden, die nur für Sie einsehbar ist?" ng-model="newMeeting.description_private"></textarea>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <!--<button type="button" class="btn" data-dismiss="modal"><i class="fa fa-close mtp-icon"></i></button>
-            <button type="submit" class="btn"><i class="fa fa-check mtp-icon"></i></button>-->
             <a class="mtp-icon-link" type="button" href="#" data-dismiss="modal"><i class="fa fa-close fa-lg mtp-icon mtp-icon-xl"></i></a>
-            <a class="mtp-icon-link" type="submit" href="#"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i></a>
+            <a class="mtp-icon-link" type="submit" href="#" ng-click="submit()"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i></a>
         </div>
+        <pre>newMeeting = {{newMeeting | json}}</pre>
     </div>
 </div>
