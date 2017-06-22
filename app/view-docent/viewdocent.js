@@ -122,8 +122,6 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
 function creationFormController($scope, ngFabForm) {
     $scope.newMeeting = {};
 
-    $scope.hasSlotsClick = hasSlotsClick;
-    $scope.isSeriesClick = isSeriesClick;
     $scope.submit = submit;
 
     $scope.fabFormOptions = {
@@ -134,22 +132,25 @@ function creationFormController($scope, ngFabForm) {
 
     function initCreationForm() {
         initTooltips();
+        initCheckboxes()
     }
 
     function initTooltips() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    function hasSlotsClick() {
-        $("#slotsGroup").fadeToggle();
-        $("#maxParticipantsGroup").fadeToggle();
-    }
-
-    function isSeriesClick() {
-        $("#endSeriesGroup").fadeToggle();
+    function initCheckboxes() {
+        $scope.newMeeting.is_series = false;
+        $scope.newMeeting.has_slots = false;
     }
 
     function submit() {
-       alert("Halo i bims sabbmitn");
+
+        if($scope.creationForm.$valid) {
+            alert("Halo i bims sabbmitn");
+        }
+        else {
+            alert("Nope");
+        }
     }
 }

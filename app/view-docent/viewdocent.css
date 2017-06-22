@@ -66,8 +66,8 @@
     font-size: 30px !important;
 }
 
-.btn-add:active,
-.btn-add:focus {
+.btn:active,
+.btn:focus {
     outline: none !important;
 }
 
@@ -212,4 +212,8 @@ time.icon span
 .modal-footer, .modal-header {
     background-color: #34495E;
     color: #1ABC9C;
+}
+
+button[type=submit], button[type=button] {
+    background-color: #34495E !important;
 }
