@@ -132,25 +132,28 @@ function creationFormController($scope, ngFabForm) {
 
     function initCreationForm() {
         initTooltips();
-        initCheckboxes()
+
+        $scope.newMeeting.is_series = false;
+        $scope.newMeeting.has_slots = false;
+        $scope.newMeeting.email_notification_docent = false;
+        $scope.newMeeting.description_public = String();
+        $scope.newMeeting.description_private = String();
     }
 
     function initTooltips() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    function initCheckboxes() {
-        $scope.newMeeting.is_series = false;
-        $scope.newMeeting.has_slots = false;
-    }
-
     function submit() {
 
+        // ToDo: Datenkonverter einbinden.
         if($scope.creationForm.$valid) {
-            alert("Halo i bims sabbmitn");
-        }
-        else {
-            alert("Nope");
+            if($scope.newMeeting.isSeries) {
+                alert("Halo i bims serienmiedgn!");
+            }
+            else {
+                alert("Halo i bims 1 miedgn!");
+            }
         }
     }
 }
