@@ -133,9 +133,9 @@ function creationFormController($scope, ngFabForm) {
     function initCreationForm() {
         initTooltips();
 
-        $scope.newMeeting.is_series = false;
-        $scope.newMeeting.has_slots = false;
-        $scope.newMeeting.email_notification_docent = false;
+        $scope.newMeeting.is_series = 0;
+        $scope.newMeeting.has_slots = 0;
+        $scope.newMeeting.email_notification_docent = 0;
         $scope.newMeeting.description_public = String();
     }
 
@@ -145,14 +145,13 @@ function creationFormController($scope, ngFabForm) {
 
     function submit() {
 
+        if($scope.newMeeting.has_slots === 0)
+        {
+            $scope.newMeeting.slots = 1;
+        }
         // ToDo: Datenkonverter einbinden.
         if($scope.creationForm.$valid) {
-            if($scope.newMeeting.isSeries) {
-                alert("Halo i bims serienmiedgn!");
-            }
-            else {
-                alert("Halo i bims 1 miedgn!");
-            }
+            $http.post('http://localhost:8000/docent/1/meeting', $scope.newMeeting);
         }
     }
 }

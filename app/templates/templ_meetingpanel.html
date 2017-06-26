@@ -67,13 +67,15 @@
                                 <th>Beginn</th>
                                 <th>Ende</th>
                                 <th>Name</th>
+                                <th>Vermerk</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="student in meeting.participating_students track by $index">
-                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.start)}}</td>
-                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.end)}}</td>
+                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.participation.start)}}</td>
+                                <td>{{meetingsViewHandler.getHoursAndMinutes(student.participation.end)}}</td>
                                 <td>{{student.firstname + " " + student.lastname}}</td>
+                                <td>{{student.participation.remark}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,18 +83,10 @@
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
-                    Beschreibung(öffentlich):
+                    Beschreibung:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.description_public}}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                <div class="col-lg-6">
-                    Beschreibung(privat):
-                </div>
-                <div class="col-lg-6">
-                    {{meeting.description_private}}
+                    {{meeting.description}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
