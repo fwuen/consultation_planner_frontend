@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de" ng-app="MeetTheProf.viewLogin">
+<head>
+    <meta charset="utf-8">
+    <title>MeetTheProf - Anmeldung</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen">
+
+    <!-- Loading additional styles -->
+    <link rel="stylesheet" href="../css/mtp.css">
+
+    <!-- Loading Font-Awesome -->
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css" media="screen">
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navHead" class="navbar navbar-inverse" style="border-radius: 0">
+    <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="MeetTheProf Logo"></a>
+</nav>
+
+<div class="container">
+    <ng-include src="'../templates/form_login.html'"></ng-include>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style="border-radius: 0">
+</nav>
+
+<!-- End of initially visible content -->
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script> <!-- Required for nearly every addon -->
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.min.js"></script> <!-- Required for ngFabForm -->
+<script src="../bower_components/angular-animate/angular-animate.min.js"></script> <!-- Required for ngFabForm -->
+<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script>
+<!-- Angular extension for easier form handling -->
+<script src="./viewlogin.js"></script> <!-- Angular module code -->
+
+</body>
