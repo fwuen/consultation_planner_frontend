@@ -137,7 +137,6 @@ function creationFormController($scope, ngFabForm) {
         $scope.newMeeting.has_slots = false;
         $scope.newMeeting.email_notification_docent = false;
         $scope.newMeeting.description_public = String();
-        $scope.newMeeting.description_private = String();
     }
 
     function initTooltips() {

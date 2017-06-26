@@ -55,12 +55,20 @@
                         </a>
                     </div>
                 </div>
-                <div id="endSeriesGroup" class="form-group" ng-show="newMeeting.is_series">
-                    <label class="control-label col-lg-3" for="end_series">Letzte Sprechstunde:</label>
+                <div id="seriesIntervalGroup" class="form-group" ng-show="newMeeting.is_series">
+                    <label class="control-label col-lg-3" for="series_interval">Intervall:</label>
                     <div class="col-lg-9">
-                        <input id="end_series" class="form-control" type="datetime-local"
-                               placeholder="Wann soll die letzte Sprechstunde der Serie stattfinden?"
-                               ng-model="newMeeting.end_series" ng-required="newMeeting.is_series">
+                        <input id="series_interval" class="form-control" type="number"
+                               placeholder="In welchem Intervall (in Tagen) sollen die Sprechstunden stattfinden?"
+                               ng-model="newMeeting.series_interval" ng-required="newMeeting.is_series" min="1" max="7">
+                    </div>
+                </div>
+                <div id="seriesCountGroup" class="form-group" ng-show="newMeeting.is_series">
+                    <label class="control-label col-lg-3" for="series_count">Anzahl:</label>
+                    <div class="col-lg-9">
+                        <input id="series_count" class="form-control" type="number"
+                               placeholder="Wie viele Sprechstunden soll die Serie enthalten?"
+                               ng-model="newMeeting.series_count" ng-required="newMeeting.is_series" min="1" max="52">
                     </div>
                 </div>
                 <div class="form-group">
@@ -102,19 +110,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-lg-3" for="description_public">Öffentliche Beschreibung:</label>
+                    <label class="control-label col-lg-3" for="description">Beschreibung:</label>
                     <div class="col-lg-9">
-                        <textarea id="description_public" class="form-control" rows="5"
-                                  placeholder="Soll eine Beschreibung verfasst werden, die für alle Benutzer einsehbar ist?"
+                        <textarea id="description" class="form-control" rows="5"
+                                  placeholder="Soll die Sprechstunde(nserie) näher beschrieben werden?"
                                   ng-model="newMeeting.description_public"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3" for="description_private">Private Beschreibung:</label>
-                    <div class="col-lg-9">
-                        <textarea id="description_private" class="form-control" rows="5"
-                                  placeholder="Soll eine Beschreibung verfasst werden, die nur für Sie einsehbar ist?"
-                                  ng-model="newMeeting.description_private"></textarea>
                     </div>
                 </div>
             </div>
