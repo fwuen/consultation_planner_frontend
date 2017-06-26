@@ -114,7 +114,7 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
     $scope.meetingsEventHandler = MeetingsEventHandler;
     $scope.meetingsViewHandler = MeetingsViewHandler;
 
-    $http.get('meetingsTest.json').then(function(meetingsTestResponse) {
+    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function(meetingsTestResponse) {
         $scope.meetingsEventHandler.setMeetings(meetingsTestResponse.data);
     });
 }
