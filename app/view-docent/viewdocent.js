@@ -96,10 +96,10 @@ function meetingsViewHandler() {
             return parseInt(aMeeting.participants_count) > 0;
         },
         getPanelType: function (aMeeting) {
-            if (aMeeting.has_passed === "true") {
+            if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
                 return "panel-passed";
             }
-            if (aMeeting.cancelled === "true") {
+            if (aMeeting.cancelled === "true" || aMeeting.cancelled === 1) {
                 return "panel-cancelled";
             }
             if (parseInt(aMeeting.participants_count) > 0) {
