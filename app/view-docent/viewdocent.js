@@ -8,7 +8,8 @@ angular
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
     .controller('CreationFormController', creationFormController)
-    .controller('CancelFormController', cancelFormController);
+    .controller('CancelFormController', cancelFormController)
+    .controller('EditFormController', editFormController);
 
 function meetingsEventHandler() {
     var meetings = [];
@@ -149,6 +150,8 @@ function creationFormController($scope, $http, ngFabForm) {
         if($scope.newMeeting.has_slots === 0)
         {
             $scope.newMeeting.slots = 1;
+        } else {
+            $scope.newMeeting.max_participants = 1;
         }
         // ToDo: Datenkonverter einbinden.
         if($scope.creationForm.$valid) {
@@ -173,13 +176,13 @@ function cancelFormController($scope, $http) {
     }
 
     function setCancelMeeting(aMeeting) {
-        $scope.meeting = aMeeting;
+        $scope.cancelMeeting = aMeeting;
     }
 
-    //TODO im cancel meeting steckt noch kein meeting drin
+    //TODO im cancel meeting steckt noch kein meeting
     function submit() {
         if($scope.cancelMeeting.$valid) {
-            if($scope.cancelSeries) {
+            if($scope.cancel_series) {
                 $http({
                     method: 'PUT',
                     url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) +'/cancelseries',
@@ -194,6 +197,32 @@ function cancelFormController($scope, $http) {
                     headers: {'Content-Type': 'application/json'}
                 });
             }
+        }
+    }
+}
+
+function editFormController($scope, $http)
+{
+    $scope.editMeeting = {};
+
+    initEditForm();
+
+    function initEditForm() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    function setEditMeeting(aMeeting) {
+        $scope.editMeeting = aMeeting;
+    }
+
+    function submit() {
+        if($scope.editMeeting.$valid) {
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
+                data: $scope.editMeeting,
+                headers: {'Content-Type': 'application/json'}
+            });
         }
     }
 }

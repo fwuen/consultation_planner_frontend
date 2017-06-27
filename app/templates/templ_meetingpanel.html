@@ -1,5 +1,5 @@
 <div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}"
-     ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
+     ng-repeat="meeting in meetingsEventHandler.getMeetings() | orderBy:'start'">
     <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
         <div class="row">
             <div class="col-lg-1">
