@@ -7,7 +7,8 @@ angular
     .factory('MeetingsEventHandler', meetingsEventHandler)
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
-    .controller('CreationFormController', creationFormController);
+    .controller('CreationFormController', creationFormController)
+    .controller('CancelFormController', cancelFormController);
 
 function meetingsEventHandler() {
     var meetings = [];
@@ -157,6 +158,34 @@ function creationFormController($scope, $http, ngFabForm) {
                 data: $scope.newMeeting,
                 headers: {'Content-Type': 'application/json'}
             });
+        }
+    }
+}
+
+function cancelFormController($scope) {
+    $scope.cancelMeeting = {};
+    $scope.cancel_series = false;
+
+    initCancelForm();
+
+    function initCancelForm() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    function setCancelMeeting(aMeeting) {
+        $scope.meeting = aMeeting;
+    }
+
+    function submit() {
+        if($scope.cancelMeeting.$valid) {
+            if($scope.cancelSeries) {
+                // ToDo: Cancel meeting series
+                alert("Halo i bims alles kanzel");
+            }
+            else {
+                // ToDo; Cancel single meeting
+                alert("Halo i bims 1 kanzel");
+            }
         }
     }
 }

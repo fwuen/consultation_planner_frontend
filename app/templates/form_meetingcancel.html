@@ -1,0 +1,31 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" ng-controller="CancelFormController">
+        <form class="form-horizontal" name="cancelForm" ng-submit="submit()" novalidate>
+            <div class="modal-header">
+                <h2 class="modal-title"><strong>Sprechstunde absagen</strong></h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="cancelSeries">Ganze Sprechstundenserie absagen:</label>
+                    <div class="col-lg-8">
+                        <input id="cancelSeries" class="checkbox-inline mtp-checkbox mtp-checkbox-series"
+                               type="checkbox"
+                               value="cancelSeries" ng-model="cancel_series">
+                        <a href="#" data-toggle="tooltip" data-placement="right"
+                           title="Soll die einzelne Sprechstunde oder die gesamte Sprechstundenserie abgesagt werden?">
+                            <div class="badge">?</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn mtp-icon-link" type="button" data-dismiss="modal"><i
+                        class="fa fa-close fa-lg mtp-icon mtp-icon-xl"></i></button>
+                <button class="btn mtp-icon-link" type="submit"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i>
+                </button>
+            </div>
+            <pre>meeting = {{meeting | json}}</pre>
+            <pre>cancel_series = {{cancel_series | json}}</pre>
+        </form>
+    </div>
+</div>

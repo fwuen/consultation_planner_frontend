@@ -28,24 +28,28 @@
     padding: 10px;
 }
 
-.panel-no-participants {
+.panel-no-participants,
+.panel-no-participants button {
     background-color: #3498DB;
 }
 
-.panel-participants {
+.panel-participants,
+.panel-participants button {
     background-color: #2ECC71;
 }
 
-.panel-action-req {
-    background-color: #E67E22;
-}
-
-.panel-cancelled {
+.panel-cancelled,
+.panel-cancelled button {
     background-color: #E74C3C;
 }
 
-.panel-passed {
+.panel-passed,
+.panel-passed button {
     background-color: #95A5A6;
+}
+
+button:focus i {
+   color: white;
 }
 
 /**
@@ -117,7 +121,6 @@
  * Icons
  */
 .mtp-icon,
-.mtp-panel-icon,
 .mtp-btn-icon {
     color: white;
 }
@@ -138,19 +141,19 @@
     color: #1ABC9C;
 }
 
-.panel-passed a:hover i {
+.panel-passed button:hover i {
     color: #7F8C8D !important;
 }
 
-.panel-no-participants a:hover i {
+.panel-no-participants button:hover i {
     color: #2980B9 !important;
 }
 
-.panel-participants a:hover i {
+.panel-participants button:hover i {
     color: #27AE60 !important;
 }
 
-.panel-cancelled a:hover i {
+.panel-cancelled button:hover i {
     color: #C0392B;
 }
 

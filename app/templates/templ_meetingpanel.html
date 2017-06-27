@@ -1,4 +1,5 @@
-<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}" ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}"
+     ng-repeat="meeting in meetingsEventHandler.getMeetings() track by $index">
     <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
         <div class="row">
             <div class="col-lg-1">
@@ -8,14 +9,13 @@
                 </time>
             </div>
             <div class="col-lg-2">
-                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} - {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
             </div>
             <div class="col-lg-7">
                 {{meeting.title}}
             </div>
             <div class="col-lg-1">
-                <a class="mtp-panel-icon-link" href="#"><i class="fa fa-pencil fa-lg mtp-panel-icon"></i></a>
-                <a class="mtp-panel-icon-link" href="#"><i class="fa fa-close fa-lg mtp-panel-icon"></i></a>
             </div>
             <div class="col-lg-1">
                 <i class="fa fa-chevron-down fa-lg"></i>
@@ -34,7 +34,7 @@
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
-                   Anmeldung nicht mehr möglich ab:
+                    Anmeldung nicht mehr möglich ab:
                 </div>
                 <div class="col-lg-6">
                     {{meetingsViewHandler.getDayMonthYearHourMinutes(meeting.last_enrollment)}}
@@ -56,7 +56,8 @@
                     {{meeting.max_participants}}
                 </div>
             </div>
-            <div class="row ng-hide" style="margin-bottom: 10px; margin-top: 10px;" ng-show="meetingsViewHandler.hasParticipants(meeting)">
+            <div class="row ng-hide" style="margin-bottom: 10px; margin-top: 10px;"
+                 ng-show="meetingsViewHandler.hasParticipants(meeting)">
                 <div class="col-lg-6">
                     Angemeldet:
                 </div>
@@ -96,6 +97,14 @@
                 <div class="col-lg-6">
                     {{meeting.email_notification_docent}}
                 </div>
+            </div>
+            <div class="row">
+                <button id="btnCancelMeeting" class="btn mtp-panel-icon-link pull-right" data-target="#cancelForm"
+                        data-toggle="modal"><i
+                        class="fa fa-close fa-lg mtp-icon-xl"></i></button>
+                <button id="btnEditMeeting" class="btn mtp-panel-icon-link pull-right"><i
+                        class="fa fa-pencil fa-lg mtp-icon-xl"></i>
+                </button>
             </div>
         </div>
     </div>
