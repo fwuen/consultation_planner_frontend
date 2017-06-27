@@ -1,5 +1,5 @@
 <div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}"
-     ng-repeat="meeting in meetingsEventHandler.getMeetings() | orderBy:'start'">
+     ng-repeat="meeting in meetings | orderBy:'start'">
     <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
         <div class="row">
             <div class="col-lg-1">
@@ -100,7 +100,7 @@
             </div>
             <div class="row">
                 <button id="btnCancelMeeting" class="btn mtp-panel-icon-link pull-right" data-target="#cancelForm"
-                        data-toggle="modal"><i
+                        data-toggle="modal" ng-click="setCancelMeeting(meeting)"><i
                         class="fa fa-close fa-lg mtp-icon-xl"></i></button>
                 <button id="btnEditMeeting" class="btn mtp-panel-icon-link pull-right"><i
                         class="fa fa-pencil fa-lg mtp-icon-xl"></i>

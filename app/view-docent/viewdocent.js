@@ -4,42 +4,10 @@ angular.module('MeetTheProf.viewDocent', ['ngFabForm', 'ngMessages', 'ngAnimate'
 
 angular
     .module('MeetTheProf.viewDocent')
-    .factory('MeetingsEventHandler', meetingsEventHandler)
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
     .controller('CreationFormController', creationFormController)
-    .controller('CancelFormController', cancelFormController)
     .controller('EditFormController', editFormController);
-
-function meetingsEventHandler() {
-    var meetings = [];
-    var creationFormIsActive = false;
-
-    return{
-        getMeetings: function() {
-            return meetings;
-        },
-        setMeetings: function(aMeetings) {
-            meetings = aMeetings;
-        },
-        getCreationFormIsActive: function() {
-            return creationFormIsActive;
-        },
-        openCreationForm: function() {
-            creationFormIsActive = true;
-            alert("Show form...");
-        },
-        cancelMeeting: function(meeting) {
-            //TODO: Code for cancelling a meeting. Bind to "absagen"-Button.
-            //meeting.cancelled = true;
-            alert("Cancelling has yet to be developed!");
-        },
-        editMeeting: function(meeting) {
-            //TODO: Code for editing a meeting. Bind to "bearbeiten"-Button.
-            alert("Editing has yet to be developed!");
-        }
-    }
-}
 
 function meetingsViewHandler() {
     return {
@@ -47,19 +15,44 @@ function meetingsViewHandler() {
             var datetime = new Date(aDatetime);
 
             switch (datetime.getMonth() + 1) {
-                case 1:  return "JAN"; break;
-                case 2:  return "FEB"; break;
-                case 3:  return "MRZ"; break;
-                case 4:  return "APR"; break;
-                case 5:  return "MAI"; break;
-                case 6:  return "JUN"; break;
-                case 7:  return "JUL"; break;
-                case 8:  return "AUG"; break;
-                case 9:  return "SEP"; break;
-                case 10: return "OKT"; break;
-                case 11: return "NOV"; break;
-                case 12: return "DEZ"; break;
-                default: return "N/A";
+                case 1:
+                    return "JAN";
+                    break;
+                case 2:
+                    return "FEB";
+                    break;
+                case 3:
+                    return "MRZ";
+                    break;
+                case 4:
+                    return "APR";
+                    break;
+                case 5:
+                    return "MAI";
+                    break;
+                case 6:
+                    return "JUN";
+                    break;
+                case 7:
+                    return "JUL";
+                    break;
+                case 8:
+                    return "AUG";
+                    break;
+                case 9:
+                    return "SEP";
+                    break;
+                case 10:
+                    return "OKT";
+                    break;
+                case 11:
+                    return "NOV";
+                    break;
+                case 12:
+                    return "DEZ";
+                    break;
+                default:
+                    return "N/A";
             }
         },
         getDayNumber: function (aDatetime) {
@@ -112,13 +105,40 @@ function meetingsViewHandler() {
     }
 }
 
-function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHandler){
-    $scope.meetingsEventHandler = MeetingsEventHandler;
+function meetingsController($scope, $http, MeetingsViewHandler) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
 
-    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function(meetingsTestResponse) {
-        $scope.meetingsEventHandler.setMeetings(meetingsTestResponse.data);
+    $scope.meetings = [];
+    $scope.cancelMeeting = {};
+    $scope.setCancelMeeting = function(aMeeting) {$scope.cancelMeeting = aMeeting};
+    $scope.cancel_series = false;
+    $scope.setCancelSeries = function(bool) {$scope.cancel_series = bool};
+    $scope.editMeeting = {};
+
+    $scope.submitCancelForm = submitCancelForm;
+
+    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function (meetingsTestResponse) {
+        $scope.meetings = meetingsTestResponse.data;
     });
+
+    function submitCancelForm() {
+        if ($scope.cancel_series) {
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
+                headers: {'Content-Type': 'application/json'}
+            });
+        }
+        else {
+            $scope.cancelMeeting.cancelled = 1;
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
+                data: $scope.cancelMeeting,
+                headers: {'Content-Type': 'application/json'}
+            });
+        }
+    }
 }
 
 function creationFormController($scope, $http, ngFabForm) {
@@ -133,28 +153,24 @@ function creationFormController($scope, $http, ngFabForm) {
     initCreationForm();
 
     function initCreationForm() {
-        initTooltips();
-
         $scope.newMeeting.is_series = 0;
         $scope.newMeeting.has_slots = 0;
+        $scope.newMeeting.cancelled = 0;
         $scope.newMeeting.email_notification_docent = 0;
         $scope.newMeeting.description_public = String();
     }
 
-    function initTooltips() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-
     function submit() {
 
-        if($scope.newMeeting.has_slots === 0)
-        {
+        if ($scope.newMeeting.has_slots === 0) {
+            alert('slots missing');
             $scope.newMeeting.slots = 1;
         } else {
+            alert('max_participants missing');
             $scope.newMeeting.max_participants = 1;
         }
         // ToDo: Datenkonverter einbinden.
-        if($scope.creationForm.$valid) {
+        if ($scope.creationForm.$valid) {
             $http({
                 method: 'POST',
                 url: 'http://localhost:8000/docent/1/meeting',
@@ -165,58 +181,13 @@ function creationFormController($scope, $http, ngFabForm) {
     }
 }
 
-function cancelFormController($scope, $http) {
-    $scope.cancelMeeting = {};
-    $scope.cancel_series = false;
-
-    initCancelForm();
-
-    function initCancelForm() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-
-    function setCancelMeeting(aMeeting) {
-        $scope.cancelMeeting = aMeeting;
-    }
-
-    //TODO im cancel meeting steckt noch kein meeting
-    function submit() {
-        if($scope.cancelMeeting.$valid) {
-            if($scope.cancel_series) {
-                $http({
-                    method: 'PUT',
-                    url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) +'/cancelseries',
-                    headers: {'Content-Type': 'application/json'}
-                });
-            }
-            else {
-                $http({
-                    method: 'PUT',
-                    url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
-                    data: $scope.cancelMeeting,
-                    headers: {'Content-Type': 'application/json'}
-                });
-            }
-        }
-    }
-}
-
-function editFormController($scope, $http)
-{
-    $scope.editMeeting = {};
-
-    initEditForm();
-
-    function initEditForm() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-
+function editFormController($scope, $http) {
     function setEditMeeting(aMeeting) {
         $scope.editMeeting = aMeeting;
     }
 
     function submit() {
-        if($scope.editMeeting.$valid) {
+        if ($scope.editMeeting.$valid) {
             $http({
                 method: 'PUT',
                 url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),

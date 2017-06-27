@@ -17,7 +17,7 @@
     <!-- Loading ngFabForm styles -->
     <link rel="stylesheet" href="validation.css">
 </head>
-<body>
+<body ng-controller="MeetingsController">
 <!-- Navbar -->
 <nav id="navHead" class="navbar navbar-inverse" style="border-radius: 0">
     <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="MeetTheProf Logo"></a>
@@ -44,15 +44,14 @@
     </div>
 </nav>
 
-<div id="meetingContainer" class="container container-if-fixed-footer" ng-controller="MeetingsController">
+<div id="meetingContainer" class="container container-if-fixed-footer">
     <div id="meetingPanelGroup" class="panel-group">
         <ng-include src="'../templates/templ_meetingpanel.html'"></ng-include>
     </div>
 </div>
 
 <!-- Button for creating a meeting -->
-<button id="btnAddMeeting" class="btn btn-add btn-round mtp-icon-link" data-toggle="modal" data-target="#creationForm"
-        ng-controller="MeetingsController">
+<button id="btnAddMeeting" class="btn btn-add btn-round mtp-icon-link" data-toggle="modal" data-target="#creationForm">
     <i class="fa fa-calendar-plus-o fa-lg mtp-btn-icon"></i>
 </button>
 
@@ -101,15 +100,15 @@
 
 <!-- End of initially visible content -->
 
-<div id="creationForm" class="modal fade" ng-controller="MeetingsController">
+<div id="creationForm" class="modal fade">
     <ng-include src="'../templates/form_meetingcreation.html'"></ng-include>
 </div>
 
-<div id="editForm" class="modal fade" ng-controller="MeetingsController">
+<div id="editForm" class="modal fade">
     <ng-include src="'../templates/form_meetingedit.html'"></ng-include>
 </div>
 
-<div id="cancelForm" class="modal fade" ng-controller="MeetingsController">
+<div id="cancelForm" class="modal fade">
     <ng-include src="'../templates/form_meetingcancel.html'"></ng-include>
 </div>
 
