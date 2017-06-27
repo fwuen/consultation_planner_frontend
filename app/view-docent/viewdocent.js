@@ -162,7 +162,7 @@ function creationFormController($scope, $http, ngFabForm) {
     }
 }
 
-function cancelFormController($scope) {
+function cancelFormController($scope, $http) {
     $scope.cancelMeeting = {};
     $scope.cancel_series = false;
 
@@ -176,15 +176,23 @@ function cancelFormController($scope) {
         $scope.meeting = aMeeting;
     }
 
+    //TODO im cancel meeting steckt noch kein meeting drin
     function submit() {
         if($scope.cancelMeeting.$valid) {
             if($scope.cancelSeries) {
-                // ToDo: Cancel meeting series
-                alert("Halo i bims alles kanzel");
+                $http({
+                    method: 'PUT',
+                    url: 'http://localhost:8000/docent/1/meeting/1/cancelseries',
+                    headers: {'Content-Type': 'application/json'}
+                });
             }
             else {
-                // ToDo; Cancel single meeting
-                alert("Halo i bims 1 kanzel");
+                $http({
+                    method: 'PUT',
+                    url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
+                    data: $scope.cancelMeeting,
+                    headers: {'Content-Type': 'application/json'}
+                });
             }
         }
     }
