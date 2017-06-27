@@ -182,7 +182,7 @@ function cancelFormController($scope, $http) {
             if($scope.cancelSeries) {
                 $http({
                     method: 'PUT',
-                    url: 'http://localhost:8000/docent/1/meeting/1/cancelseries',
+                    url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) +'/cancelseries',
                     headers: {'Content-Type': 'application/json'}
                 });
             }
