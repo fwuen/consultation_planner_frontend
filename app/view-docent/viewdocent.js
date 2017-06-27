@@ -119,7 +119,7 @@ function meetingsController($scope, $http, MeetingsEventHandler, MeetingsViewHan
     });
 }
 
-function creationFormController($scope, ngFabForm) {
+function creationFormController($scope, $http, ngFabForm) {
     $scope.newMeeting = {};
 
     $scope.submit = submit;
@@ -151,7 +151,12 @@ function creationFormController($scope, ngFabForm) {
         }
         // ToDo: Datenkonverter einbinden.
         if($scope.creationForm.$valid) {
-            $http.post('http://localhost:8000/docent/1/meeting', $scope.newMeeting);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8000/docent/1/meeting',
+                data: $scope.newMeeting,
+                headers: {'Content-Type': 'application/json'}
+            });
         }
     }
 }
