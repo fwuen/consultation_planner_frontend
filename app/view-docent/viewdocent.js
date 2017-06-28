@@ -114,6 +114,7 @@ function meetingsController($scope, $http, MeetingsViewHandler) {
     $scope.cancel_series = false;
     $scope.setCancelSeries = function(bool) {$scope.cancel_series = bool};
     $scope.editMeeting = {};
+    $scope.setEditMeeting = function(aMeeting) {$scope.editMeeting = aMeeting};
 
     $scope.submitCancelForm = submitCancelForm;
 
