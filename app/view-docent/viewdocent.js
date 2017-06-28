@@ -164,6 +164,8 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
             data: $scope.editMeeting,
             headers: {'Content-Type': 'application/json'}
+        }).then(function (data) {
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
         });
     }
 }
