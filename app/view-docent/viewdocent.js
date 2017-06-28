@@ -6,8 +6,7 @@ angular
     .module('MeetTheProf.viewDocent')
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
-    .controller('CreationFormController', creationFormController)
-    .controller('EditFormController', editFormController);
+    .controller('CreationFormController', creationFormController);
 
 function meetingsViewHandler() {
     return {
@@ -105,18 +104,32 @@ function meetingsViewHandler() {
     }
 }
 
-function meetingsController($scope, $http, MeetingsViewHandler) {
+function meetingsController($scope, $http, MeetingsViewHandler, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
 
+    $scope.fabFormOptions = {
+        validationsTemplate: 'validation.html'
+    };
+
     $scope.meetings = [];
+
     $scope.cancelMeeting = {};
-    $scope.setCancelMeeting = function(aMeeting) {$scope.cancelMeeting = aMeeting};
+    $scope.setCancelMeeting = function (aMeeting) {
+        $scope.cancelMeeting = angular.copy(aMeeting);
+    };
+
     $scope.cancel_series = false;
-    $scope.setCancelSeries = function(bool) {$scope.cancel_series = bool};
+    $scope.setCancelSeries = function (bool) {
+        $scope.cancel_series = bool
+    };
+
     $scope.editMeeting = {};
-    $scope.setEditMeeting = function(aMeeting) {$scope.editMeeting = aMeeting};
+    $scope.setEditMeeting = function (aMeeting) {
+        $scope.editMeeting = angular.copy(aMeeting);
+    };
 
     $scope.submitCancelForm = submitCancelForm;
+    $scope.submitEditForm = submitEditForm;
 
     $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function (meetingsTestResponse) {
         $scope.meetings = meetingsTestResponse.data;
@@ -140,6 +153,15 @@ function meetingsController($scope, $http, MeetingsViewHandler) {
             });
         }
     }
+
+    function submitEditForm() {
+        $http({
+            method: 'PUT',
+            url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
+            data: $scope.editMeeting,
+            headers: {'Content-Type': 'application/json'}
+        });
+    }
 }
 
 function creationFormController($scope, $http, ngFabForm) {
@@ -158,41 +180,23 @@ function creationFormController($scope, $http, ngFabForm) {
         $scope.newMeeting.has_slots = 0;
         $scope.newMeeting.cancelled = 0;
         $scope.newMeeting.email_notification_docent = 0;
-        $scope.newMeeting.description_public = String();
+        $scope.newMeeting.description = String();
     }
 
     function submit() {
 
         if ($scope.newMeeting.has_slots === 0) {
-            alert('slots missing');
+            alert("keine slots");
             $scope.newMeeting.slots = 1;
         } else {
-            alert('max_participants missing');
+            alert("ja zu slots");
             $scope.newMeeting.max_participants = 1;
         }
-        // ToDo: Datenkonverter einbinden.
         if ($scope.creationForm.$valid) {
             $http({
                 method: 'POST',
                 url: 'http://localhost:8000/docent/1/meeting',
                 data: $scope.newMeeting,
-                headers: {'Content-Type': 'application/json'}
-            });
-        }
-    }
-}
-
-function editFormController($scope, $http) {
-    function setEditMeeting(aMeeting) {
-        $scope.editMeeting = aMeeting;
-    }
-
-    function submit() {
-        if ($scope.editMeeting.$valid) {
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
-                data: $scope.editMeeting,
                 headers: {'Content-Type': 'application/json'}
             });
         }

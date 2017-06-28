@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <form class="form-horizontal" name="editForm" ng-submit="submitEditForm()" novalidate>
+        <form class="form-horizontal" name="editForm" ng-fab-form-options="fabFormOptions" ng-submit="submitEditForm()" novalidate>
             <div class="modal-header">
                 <h2 class="modal-title"><strong>Sprechstunde ändern</strong></h2>
             </div>
@@ -10,7 +10,7 @@
                     <div class="col-lg-9">
                         <input id="title" class="form-control" type="text"
                                placeholder="Wie soll der neue Titel lauten?" ng-model="editMeeting.title"
-                               required>
+                               required ng-minlength="3" ng-maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">
@@ -18,15 +18,15 @@
                     <div class="col-lg-9">
                         <input id="room" class="form-control" type="text"
                                placeholder="In welchem Raum soll die Sprechstunde stattfinden?"
-                               ng-model="editMeeting.room" required>
+                               ng-model="editMeeting.room" required ng-minlength="3" ng-maxlength="10">
                     </div>
                 </div>
-                <div id="maxParticipantsGroup" class="form-group" ng-hide="newMeeting.has_slots">
+                <div id="maxParticipantsGroup" class="form-group" ng-show="editMeeting.slots < 2">
                     <label class="control-label col-lg-3" for="max_participants">Max. Teilnehmer:</label>
                     <div class="col-lg-9">
-                        <input id="max_participants" class="form-control" type="text"
+                        <input id="max_participants" class="form-control" type="number"
                                placeholder="Wie viele Studierende sollen an der Sprechstunde teilnehmen können?"
-                               ng-model="editMeeting.max_participants" ng-required="!editMeeting.has_slots">
+                               ng-model="editMeeting.max_participants" ng-required="editMeeting.slots < 2" min="1">
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,15 +45,17 @@
                     <div class="col-lg-9">
                         <textarea id="description" class="form-control" rows="5"
                                   placeholder="Soll die Sprechstunde näher beschrieben werden?"
-                                  ng-model="editMeeting.description"></textarea>
+                                  ng-model="editMeeting.description" maxlength="500"></textarea>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn mtp-icon-link" type="button" data-dismiss="modal"><i
+                        class="fa fa-close fa-lg mtp-icon mtp-icon-xl"></i></button>
+                <button class="btn mtp-icon-link" type="submit"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i>
+                </button>
+            </div>
+            <pre>editMeeting = {{editMeeting | json}}</pre>
         </form>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default">Speichern</button>
-        <button type="button" class="btn btn-default">Abbrechen</button>
-    </div>
-    </form>
-</div>
 </div>

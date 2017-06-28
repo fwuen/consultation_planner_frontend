@@ -11,7 +11,7 @@
                     <div class="col-lg-9">
                         <input id="title" class="form-control" type="text"
                                placeholder="Welchen Titel soll die Sprechstunde tragen?" ng-model="newMeeting.title"
-                               required>
+                               required ng-minlength="3" ng-maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">
@@ -19,7 +19,7 @@
                     <div class="col-lg-9">
                         <input id="room" class="form-control" type="text"
                                placeholder="In welchem Raum soll die Sprechstunde stattfinden?"
-                               ng-model="newMeeting.room" required>
+                               ng-model="newMeeting.room" required ng-minlength="3" ng-maxlength="10">
                     </div>
                 </div>
                 <div class="form-group">
@@ -85,15 +85,15 @@
                 <div id="slotsGroup" class="form-group" ng-show="newMeeting.has_slots">
                     <label class="control-label col-lg-3" for="slots">Slotanzahl:</label>
                     <div class="col-lg-9">
-                        <input id="slots" class="form-control" type="text"
+                        <input id="slots" class="form-control" type="number"
                                placeholder="In wie viele Slots soll die Sprechstunde aufgeteilt werden?"
-                               ng-model="newMeeting.slots" ng-required="newMeeting.has_slots">
+                               ng-model="newMeeting.slots" ng-required="newMeeting.has_slots" min="2">
                     </div>
                 </div>
                 <div id="maxParticipantsGroup" class="form-group" ng-hide="newMeeting.has_slots">
                     <label class="control-label col-lg-3" for="max_participants">Max. Teilnehmer:</label>
                     <div class="col-lg-9">
-                        <input id="max_participants" class="form-control" type="text"
+                        <input id="max_participants" class="form-control" type="number"
                                placeholder="Wie viele Studierende sollen an der Sprechstunde teilnehmen können?"
                                ng-model="newMeeting.max_participants" ng-required="!newMeeting.has_slots">
                     </div>
@@ -114,7 +114,7 @@
                     <div class="col-lg-9">
                         <textarea id="description" class="form-control" rows="5"
                                   placeholder="Soll die Sprechstunde(nserie) näher beschrieben werden?"
-                                  ng-model="newMeeting.description"></textarea>
+                                  ng-model="newMeeting.description" maxlength="500"></textarea>
                     </div>
                 </div>
             </div>
