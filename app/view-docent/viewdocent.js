@@ -105,7 +105,7 @@ function meetingsViewHandler() {
     }
 }
 
-function meetingsController($scope, $http, MeetingsViewHandler) {
+function meetingsController($scope, $http, $window, MeetingsViewHandler) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
 
     $scope.meetings = [];
@@ -128,6 +128,8 @@ function meetingsController($scope, $http, MeetingsViewHandler) {
                 method: 'PUT',
                 url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
                 headers: {'Content-Type': 'application/json'}
+            }).then(function (data) {
+                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
         }
         else {
@@ -137,12 +139,14 @@ function meetingsController($scope, $http, MeetingsViewHandler) {
                 url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
                 data: $scope.cancelMeeting,
                 headers: {'Content-Type': 'application/json'}
+            }).then(function (data) {
+                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
         }
     }
 }
 
-function creationFormController($scope, $http, ngFabForm) {
+function creationFormController($scope, $http, $window, ngFabForm) {
     $scope.newMeeting = {};
 
     $scope.submit = submit;
@@ -177,6 +181,8 @@ function creationFormController($scope, $http, ngFabForm) {
                 url: 'http://localhost:8000/docent/1/meeting',
                 data: $scope.newMeeting,
                 headers: {'Content-Type': 'application/json'}
+            }).then(function (data) {
+                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
         }
     }
