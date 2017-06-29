@@ -1,1 +1,77 @@
-<p>{{meeting.id}}</p>
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(participation)}}" id="panel{{participation.id}}"
+     ng-repeat="participation in participations | orderBy:'start'">
+    <div data-toggle="collapse" data-target="#participation{{participation.id}}" href="#participation{{participation.id}}">
+        <div class="row">
+            <div class="col-lg-1">
+                <time class="icon">
+                    <strong>{{meetingsViewHandler.getMonth(participation.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(participation.end)}}</span>
+                </time>
+            </div>
+            <div class="col-lg-2">
+                {{meetingsViewHandler.getHoursAndMinutes(participation.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(participation.end)}}
+            </div>
+            <div class="col-lg-7">
+                {{participation.meeting.title}}
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <i class="fa fa-chevron-down fa-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <div id="participation{{}}" class="panel-collapse collapse">
+        <div class="container-fluid">
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Dozent:
+                </div>
+                <div class="col-lg-6">
+                    {{participation.docent.lastname + ', ' + participation.docent.firstname}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Raum:
+                </div>
+                <div class="col-lg-6">
+                    {{participation.meeting.room}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Beschreibung:
+                </div>
+                <div class="col-lg-6">
+                    {{participation.meeting.description}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Emailbenachrichtigung aktiviert:
+                </div>
+                <div class="col-lg-6">
+                    {{participation.email_notification_student}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Vermerk zur Anmeldung:
+                </div>
+                <div class="col-lg-6">
+                    {{participation.remark}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">-->
+        <!--TODO cancelParticipation-Form bzw. zusätzliche Abfrage, ob der Nutzer die Participation wirklich löschen möchte-->
+        <button id="btnCancelParticipation" class="btn mtp-panel-icon-link pull-right" data-target="#cancelParticipation"
+                data-toggle="modal" ng-click="cancelParticipation(participation)"><i
+                class="fa fa-close fa-lg mtp-icon-xl"></i>
+        </button>
+    </div>
+</div>

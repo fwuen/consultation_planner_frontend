@@ -131,8 +131,8 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     $scope.submitCancelForm = submitCancelForm;
     $scope.submitEditForm = submitEditForm;
 
-    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function (meetingsTestResponse) {
-        $scope.meetings = meetingsTestResponse.data;
+    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function (response) {
+        $scope.meetings = response.data;
     });
 
     function submitCancelForm() {
