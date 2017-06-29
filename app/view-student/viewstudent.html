@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="well well-lg" ng-show="!studentHasMeetings()">
+        <div class="well well-lg well-warn" ng-show="!studentHasMeetings()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
@@ -70,16 +70,22 @@
                     <div class="col-lg-4">
                         <div class="docent-selector-search">
                             <input class="docent-selector-search-field" type="search" value=""
-                                   placeholder="Dozent suchen..."/>
+                                   placeholder="Dozent suchen..." ng-model="searchTerm"/>
                             <i class="docent-selector-icon fa fa-search fa-lg"></i>
                         </div>
                     </div>
                     <div class="col-lg-8">
+                        <!-- ToDo: Make search field and warning/selected docent align each other -->
+                        <div class="docent-selector-warning">
+                            <i class="fa fa-info-circle fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
+                            <p class="docent-selector-warning-field">Es ist kein Dozent ausgewählt.</p>
+                        </div>
                         <!-- ToDo: Add selected docent -->
                     </div>
                 </div>
-                <ul>
-                    <ng-include src="'../templates/templ_docentselectorelement.html'"></ng-include>
+                <ul ng-show="searchTerm != ''">
+                    <ng-include src="'../templates/templ_docentselectorelement.html'"
+                                ng-repeat="docent in docents | filter:searchTerm:firstname:lastname | orderBy:'lastname'"></ng-include>
                 </ul>
             </div>
         </div>
@@ -91,7 +97,7 @@
             </div>
         </div>
 
-        <div class="well well-lg" ng-show="!docentHasMeetings()">
+        <div class="well well-lg well-warn" ng-show="showDocentMeetingsWell()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
@@ -103,9 +109,6 @@
         </div>
     </div>
 </div>
-
-<pre>studentHasMeetings = {{studentHasMeetings() | json}}</pre>
-<pre>docentHasMeetings = {{docentHasMeetings() | json}}</pre>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom" style="border-radius: 0">
     <div class="container-fluid">

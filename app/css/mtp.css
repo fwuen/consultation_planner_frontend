@@ -289,16 +289,16 @@ h1 strong {
    color: #34495E;
 }
 
-.well {
+.well-warn {
     background-color: #E67E22;
 }
 
-.well p strong {
+.well-warn p strong {
     color: white;
     font-size: 20px;
 }
 
-.well p {
+.well-warn p {
     padding-top: 8px;
 }
 
@@ -373,7 +373,7 @@ h1 strong {
     position: relative;
     background: #1abc9c;
     background-size: 16px 16px;
-    border-radius: 6px 6px 0 0;
+    border-radius: 6px 0 0 0;
     color: #34495e;
     padding: 19px 25px 20px;
 }
@@ -415,6 +415,11 @@ h1 strong {
     font-size: 24px;
     padding: 11px 22px 0 0;
 }
+.docent-selector-icon-warn {
+    float: left;
+    font-size: 40px;
+    padding: 0 22px 0 0;
+}
 .docent-selector-content {
     padding-top: 1px;
     overflow: hidden;
@@ -423,4 +428,25 @@ h1 strong {
     color: #ffffff;
     font-size: 17px;
     margin: 1px 0 3px;
+}
+.docent-selector-warning {
+    position: relative;
+    background: #E67E22;
+    background-size: 16px 16px;
+    color: white;
+    border-radius: 0 6px 0 0;
+    padding: 19px 25px 20px;
+}
+.docent-selector-warning-field {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 23px;
+    padding: 5px 0;
+    text-indent: 0;
+    box-shadow: none;
+    outline: none;
 }

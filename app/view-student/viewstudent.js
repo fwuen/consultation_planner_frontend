@@ -23,11 +23,29 @@ function studentMeetingsController($scope, $http) {
 }
 
 function docentMeetingsController($scope, $http) {
-    $scope.docentMeetings = [];
+    $scope.docents = [
+        {'id': '1', 'firstname': 'Andrej', 'lastname': 'Bachmann'},
+        {'id': '2', 'firstname': 'Peter', 'lastname': 'Stöhr'},
+        {'id': '3', 'firstname': 'Barbara', 'lastname': 'Ashauer'}
+    ];
+    $scope.selectedDocent = {
+        'id': '1', 'firstname': 'Andrej', 'lastname': 'Bachmann'
+    };
+    $scope.selectedDocentMeetings = [
+        {}
+    ];
+
+    $scope.searchTerm = String();
+
+    $scope.showDocentMeetingsWell = function() {
+        // Show well only in case of selected docent not having any meetings
+        return $scope.selectedDocentMeetings.length < 1 &&
+        !angular.equals($scope.selectedDocent, {});
+    };
 
     $scope.docentHasMeetings = function() {
-        return $scope.docentHasMeetings.length > 0;
-    }
+        return $scope.selectedDocentMeetings.length > 0;
+    };
 
     $scope.setSelectorClass = function(event) {
         if(event.type === 'mouseenter') {
@@ -36,5 +54,5 @@ function docentMeetingsController($scope, $http) {
         if(event.type === 'mouseleave') {
             event.target.classList.remove("docent-selector-hovered");
         }
-    }
+    };
 }
