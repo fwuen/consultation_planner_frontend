@@ -1,0 +1,76 @@
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}">
+    <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
+        <div class="row">
+            <div class="col-lg-1">
+                <time class="icon">
+                    <strong>{{meetingsViewHandler.getMonth(meeting.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(meeting.end)}}</span>
+                </time>
+            </div>
+            <div class="col-lg-2">
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
+            </div>
+            <div class="col-lg-7">
+                {{meeting.meeting.title}}
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <i class="fa fa-chevron-down fa-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <div id="meeting{{meeting.id}}" class="panel-collapse collapse">
+        <div class="container-fluid">
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Dozent:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.docent.lastname + ', ' + meeting.docent.firstname}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Raum:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.meeting.room}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Beschreibung:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.meeting.description}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Emailbenachrichtigung aktiviert:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.email_notification_student}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Vermerk zur Anmeldung:
+                </div>
+                <div class="col-lg-6">
+                    {{meeting.remark}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">-->
+        <!--TODO cancelParticipation-Form bzw. zusätzliche Abfrage, ob der Nutzer die Participation wirklich löschen möchte-->
+        <button id="btnCancelParticipation" class="btn mtp-panel-icon-link pull-right" data-target="#cancelParticipation"
+                data-toggle="modal" ng-click="cancelParticipation(meeting)"><i
+                class="fa fa-close fa-lg mtp-icon-xl"></i>
+        </button>
+    </div>
+</div>
