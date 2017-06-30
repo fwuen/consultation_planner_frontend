@@ -86,7 +86,7 @@ function meetingsViewHandler() {
 
             return result;
         },
-        getPanelType: function (aParticipation) {
+        getPanelType: function (aMeeting) {
             if (aMeeting.has_passed === "true" || aParticipation.meeting.has_passed === 1) {
                 return "panel-passed";
             }

@@ -1,19 +1,18 @@
-<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(participation)}}" id="panel{{participation.id}}"
-     ng-repeat="participation in participations | orderBy:'start'">
-    <div data-toggle="collapse" data-target="#participation{{participation.id}}" href="#participation{{participation.id}}">
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}">
+    <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
         <div class="row">
             <div class="col-lg-1">
                 <time class="icon">
-                    <strong>{{meetingsViewHandler.getMonth(participation.start)}}</strong>
-                    <span>{{meetingsViewHandler.getDayNumber(participation.end)}}</span>
+                    <strong>{{meetingsViewHandler.getMonth(meeting.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(meeting.end)}}</span>
                 </time>
             </div>
             <div class="col-lg-2">
-                {{meetingsViewHandler.getHoursAndMinutes(participation.start)}} -
-                {{meetingsViewHandler.getHoursAndMinutes(participation.end)}}
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
             </div>
             <div class="col-lg-7">
-                {{participation.meeting.title}}
+                {{meeting.meeting.title}}
             </div>
             <div class="col-lg-1">
             </div>
@@ -23,14 +22,14 @@
         </div>
     </div>
 
-    <div id="participation{{}}" class="panel-collapse collapse">
+    <div id="meeting{{meeting.id}}" class="panel-collapse collapse">
         <div class="container-fluid">
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
                     Dozent:
                 </div>
                 <div class="col-lg-6">
-                    {{participation.docent.lastname + ', ' + participation.docent.firstname}}
+                    {{meeting.docent.lastname + ', ' + meeting.docent.firstname}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -38,7 +37,7 @@
                     Raum:
                 </div>
                 <div class="col-lg-6">
-                    {{participation.meeting.room}}
+                    {{meeting.meeting.room}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -46,7 +45,7 @@
                     Beschreibung:
                 </div>
                 <div class="col-lg-6">
-                    {{participation.meeting.description}}
+                    {{meeting.meeting.description}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -54,7 +53,7 @@
                     Emailbenachrichtigung aktiviert:
                 </div>
                 <div class="col-lg-6">
-                    {{participation.email_notification_student}}
+                    {{meeting.email_notification_student}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -62,7 +61,7 @@
                     Vermerk zur Anmeldung:
                 </div>
                 <div class="col-lg-6">
-                    {{participation.remark}}
+                    {{meeting.remark}}
                 </div>
             </div>
         </div>
@@ -70,7 +69,7 @@
     <div class="row">-->
         <!--TODO cancelParticipation-Form bzw. zusätzliche Abfrage, ob der Nutzer die Participation wirklich löschen möchte-->
         <button id="btnCancelParticipation" class="btn mtp-panel-icon-link pull-right" data-target="#cancelParticipation"
-                data-toggle="modal" ng-click="cancelParticipation(participation)"><i
+                data-toggle="modal" ng-click="cancelParticipation(meeting)"><i
                 class="fa fa-close fa-lg mtp-icon-xl"></i>
         </button>
     </div>
