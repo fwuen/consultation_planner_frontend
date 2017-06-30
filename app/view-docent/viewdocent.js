@@ -87,7 +87,7 @@ function meetingsViewHandler() {
             return result;
         },
         hasParticipants: function (aMeeting) {
-            return parseInt(aMeeting.participants_count) > 0;
+            return (parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length != 0);
         },
         getPanelType: function (aMeeting) {
             if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
@@ -96,7 +96,7 @@ function meetingsViewHandler() {
             if (aMeeting.cancelled === "true" || aMeeting.cancelled === 1) {
                 return "panel-cancelled";
             }
-            if (parseInt(aMeeting.participants_count) > 0) {
+            if ((parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length != 0)) {
                 return "panel-participants";
             }
             return "panel-no-participants";
