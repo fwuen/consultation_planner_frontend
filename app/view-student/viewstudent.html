@@ -25,14 +25,6 @@
         <ul class="nav navbar-nav navbar-right ">
             <li><a class="mtp-icon-link" href="#"><span class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a class="mtp-icon-link" href="#">
-                    <i class="fa fa-bell-o fa-lg mtp-icon"></i>
-                    <span class="badge mtp-notification">42</span>
-                </a>
-            </li>
-        </ul>
     </div>
 </nav>
 
@@ -40,7 +32,7 @@
     <div id="studentContainer" class="container" ng-controller="StudentMeetingsController">
         <h1><strong>Meine Anmeldungen</strong></h1>
 
-        <div id="meetingContainerStudent" class="container" ng-show="studentHasMeetings()">
+        <div id="meetingContainerStudent" class="container" ng-show="studentHasMeetings()" style="margin-left: -14px;">
             <div class="panel-group">
                 <ng-include src="'../templates/templ_meetingpanelparticipant.html'"
                             ng-repeat="meeting in studentMeetings"></ng-include>
@@ -53,7 +45,7 @@
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
                 </div>
                 <div class="col-lg-11">
-                    <P><strong>Sie sind zur Zeit an keiner Sprechstunde angemeldet.</strong></p>
+                    <p><strong>Sie sind zur Zeit an keiner Sprechstunde angemeldet.</strong></p>
                 </div>
             </div>
         </div>
@@ -137,7 +129,7 @@
                     </div>
                 </div>
                 <div class="row row-key" style="color: white;">
-                    Anmeldung nicht möglich
+                    Anmeldung nicht möglich/vergangen
                 </div>
             </div>
             <div class="col-lg-1">
@@ -154,6 +146,9 @@
 </nav>
 
 <!-- End of initially visible content -->
+<div id="cancelForm" class="modal fade">
+    <ng-include src="'../templates/form_participationcancel.html'"></ng-include>
+</div>
 
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script> <!-- Required for nearly every addon -->
 <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

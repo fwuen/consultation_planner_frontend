@@ -87,42 +87,64 @@ function meetingsViewHandler() {
             return result;
         },
         getPanelType: function (aMeeting) {
-            if (aMeeting.has_passed === "true" || aParticipation.meeting.has_passed === 1) {
+            if (aMeeting.has_passed == "true" || aMeeting.has_passed == 1) {
                 return "panel-passed";
             }
-            if (aMeeting.cancelled === "true" || aParticipation.meeting.cancelled === 1) {
+            if (aMeeting.cancelled == "true" || aMeeting.cancelled == 1) {
                 return "panel-cancelled";
             }
-            return "panel-participants";
+            if (aMeeting.hasOwnProperty('participation')) {
+                return "panel-participants";
+            }
+            return "panel-no-participants";
         }
     }
 }
 
-function studentMeetingsController($scope, $http) {
+function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) {
+    $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.studentMeetings = [];
+    $scope.cancelParticipation = {};
 
     $scope.studentHasMeetings = function() {
         return $scope.studentMeetings.length > 0;
     }
 
+    $scope.setCancelParticipation = function (aParticipation) {
+        $scope.cancelParticipation = angular.copy(aParticipation)
+    };
+
+    $scope.submitCancelForm = submitCancelForm;
+
+    function submitCancelForm() {
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:8000/student/1/participation' + ($scope.cancelParticipation.id),
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (data) {
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+        });
+    }
+
+    /*
     $http.get('meetingsTest.json').then(function(response) {
         $scope.studentMeetings = response.data;
-    });
+    });*/
+
+    $http.get('http://localhost:8000/student/1/participation').then(function(response) {
+        $scope.studentMeetings = response.data;
+    })
 
 }
 
 function docentMeetingsController($scope, $http) {
-    $scope.docents = [
-        {'id': '1', 'firstname': 'Andrej', 'lastname': 'Bachmann'},
-        {'id': '2', 'firstname': 'Peter', 'lastname': 'Stöhr'},
-        {'id': '3', 'firstname': 'Barbara', 'lastname': 'Ashauer'}
-    ];
-    $scope.selectedDocent = {
-        'id': '1', 'firstname': 'Andrej', 'lastname': 'Bachmann'
-    };
-    $scope.selectedDocentMeetings = [
-        {}
-    ];
+    $scope.docents = [];
+    $scope.selectedDocent = {};
+    $scope.selectedDocentMeetings = [];
+
+    $http.get('http://localhost:8000/docent').then(function(response) {
+        $scope.docents = response.data;
+    });
 
     $scope.searchTerm = String();
 

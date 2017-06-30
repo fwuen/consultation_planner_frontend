@@ -205,7 +205,7 @@ function creationFormController($scope, $http, $window, ngFabForm) {
                 data: $scope.newMeeting,
                 headers: {'Content-Type': 'application/json'}
             }).then(function (data) {
-                $window.location.href = 'http://localhost/frontend_new/app/view-docent/viewdocent.html';
+                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
         }
     }

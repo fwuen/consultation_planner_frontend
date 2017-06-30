@@ -3,16 +3,16 @@
         <div class="row">
             <div class="col-lg-1">
                 <time class="icon">
-                    <strong>{{meetingsViewHandler.getMonth(meeting.start)}}</strong>
-                    <span>{{meetingsViewHandler.getDayNumber(meeting.end)}}</span>
+                    <strong>{{meetingsViewHandler.getMonthName(meeting.participation.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(meeting.participation.end)}}</span>
                 </time>
             </div>
             <div class="col-lg-2">
-                {{meetingsViewHandler.getHoursAndMinutes(meeting.start)}} -
-                {{meetingsViewHandler.getHoursAndMinutes(meeting.end)}}
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.participation.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(meeting.participation.end)}}
             </div>
             <div class="col-lg-7">
-                {{meeting.meeting.title}}
+                {{meeting.title}}
             </div>
             <div class="col-lg-1">
             </div>
@@ -37,7 +37,7 @@
                     Raum:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.meeting.room}}
+                    {{meeting.room}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -45,7 +45,7 @@
                     Beschreibung:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.meeting.description}}
+                    {{meeting.description}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -53,7 +53,7 @@
                     Emailbenachrichtigung aktiviert:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.email_notification_student}}
+                    {{meeting.participation.email_notification_student}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
@@ -61,15 +61,15 @@
                     Vermerk zur Anmeldung:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.remark}}
+                    {{meeting.participation.remark}}
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">-->
+    <div class="row">
         <!--TODO cancelParticipation-Form bzw. zusätzliche Abfrage, ob der Nutzer die Participation wirklich löschen möchte-->
-        <button id="btnCancelParticipation" class="btn mtp-panel-icon-link pull-right" data-target="#cancelParticipation"
-                data-toggle="modal" ng-click="cancelParticipation(meeting)"><i
+        <button id="btnCancelParticipation" class="btn mtp-panel-icon-link pull-right" data-target="#cancelForm"
+                data-toggle="modal" ng-click="setCancelParticipation(meeting.participation)" style="margin-right:37px;"><i
                 class="fa fa-close fa-lg mtp-icon-xl"></i>
         </button>
     </div>
