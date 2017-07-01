@@ -104,7 +104,7 @@ function meetingsViewHandler() {
     }
 }
 
-function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabForm) {
+function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabForm, $localStorage) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
 
     $scope.fabFormOptions = {
@@ -131,8 +131,10 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     $scope.submitCancelForm = submitCancelForm;
     $scope.submitEditForm = submitEditForm;
 
-    $http.get('http://localhost:8000/docent/1/meeting/coalition').then(function (response) {
-        $scope.meetings = response.data;
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8000/docent/1/meeting/coalition',
+        headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
     });
 
     function submitCancelForm() {
@@ -140,7 +142,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             $http({
                 method: 'PUT',
                 url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
                 $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
@@ -151,7 +153,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
                 method: 'PUT',
                 url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
                 data: $scope.cancelMeeting,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
                 $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
@@ -163,14 +165,14 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             method: 'PUT',
             url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
             data: $scope.editMeeting,
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
         });
     }
 }
 
-function creationFormController($scope, $http, $window, ngFabForm) {
+function creationFormController($scope, $http, $window, ngFabForm, $localStorage) {
     $scope.newMeeting = {};
 
     $scope.submit = submit;
