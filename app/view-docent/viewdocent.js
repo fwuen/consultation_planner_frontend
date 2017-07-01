@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MeetTheProf.viewDocent', ['ngFabForm', 'ngMessages', 'ngAnimate']);
+angular.module('MeetTheProf.viewDocent', ['ngFabForm', 'ngMessages', 'ngAnimate', 'ngStorage']);
 
 angular
     .module('MeetTheProf.viewDocent')
@@ -203,7 +203,7 @@ function creationFormController($scope, $http, $window, ngFabForm) {
                 method: 'POST',
                 url: 'http://localhost:8000/docent/1/meeting',
                 data: $scope.newMeeting,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
                 $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
