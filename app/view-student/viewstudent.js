@@ -105,14 +105,14 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) 
     $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.studentMeetings = [];
     $scope.cancelParticipation = {};
+    $scope.setCancelParticipation = function (aParticipation) {
+        //$scope.cancelParticipation = aParticipation;
+        $scope.cancelParticipation = angular.copy(aParticipation);
+    };
 
     $scope.studentHasMeetings = function() {
         return $scope.studentMeetings.length > 0;
     }
-
-    $scope.setCancelParticipation = function (aParticipation) {
-        $scope.cancelParticipation = angular.copy(aParticipation)
-    };
 
     $scope.submitCancelForm = submitCancelForm;
 
