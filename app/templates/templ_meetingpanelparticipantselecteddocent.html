@@ -1,0 +1,82 @@
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(docentMeeting)}}" id="panel{{docentMeeting.id}}">
+    <div data-toggle="collapse" data-target="#docentMeeting{{docentMeeting.id}}" href="#docentMeeting{{docentMeeting.id}}">
+        <div class="row">
+            <div class="col-lg-1">
+                <time class="icon">
+                    <strong>{{meetingsViewHandler.getMonthName(docentMeeting.start)}}</strong>
+                    <span>{{meetingsViewHandler.getDayNumber(docentMeeting.end)}}</span>
+                </time>
+            </div>
+            <div class="col-lg-2">
+                {{meetingsViewHandler.getHoursAndMinutes(docentMeeting.start)}} -
+                {{meetingsViewHandler.getHoursAndMinutes(docentMeeting.end)}}
+            </div>
+            <div class="col-lg-7">
+                {{docentMeeting.title}}
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <i class="fa fa-chevron-down fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div id="docentMeeting{{docentMeeting.id}}" class="panel-collapse collapse">
+        <div class="container-fluid">
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Raum:
+                </div>
+                <div class="col-lg-6">
+                    {{docentMeeting.room}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Beschreibung:
+                </div>
+                <div class="col-lg-6">
+                    {{docentMeeting.description}}
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-lg-6">
+                    Letztmögliche Anmeldung:
+                </div>
+                <div class="col-lg-6">
+                    {{docentMeeting.last_enrollment}}
+                </div>
+            </div>
+            <div class="row ng-hide" style="margin-bottom: 10px; margin-top: 10px;"
+                 ng-show="meetingsViewHandler.isBookable(docentMeeting)">
+                <div class="col-lg-6">
+                    Slots:
+                </div>
+                <div class="col-lg-6">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Beginn</th>
+                            <th>Ende</th>
+                            <th>Anmeldung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="slot in docentMeeting.unoccupiedSlots track by $index">
+                            <td>{{meetingsViewHandler.getHoursAndMinutes(slot.start)}}</td>
+                            <td>{{meetingsViewHandler.getHoursAndMinutes(slot.end)}}</td>
+                            <td><button id="btnParticipateMeeting" class="btn mtp-panel-icon-link" data-target="#creationForm"
+                                        data-toggle="modal" ng-click="setParticipateMeetingAndSlot(docentMeeting, slot)" style="margin-right:37px;"><i
+                                    class="fa fa-check fa-lg mtp-icon-xl"></i>
+                            </button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="creationForm" class="modal fade">
+        <ng-include src="'../templates/form_participationcreation.html'"></ng-include>
+    </div>
+</div>

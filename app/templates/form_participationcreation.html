@@ -1,0 +1,48 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form class="form-horizontal" name="creationForm" ng-submit="submit()"
+              novalidate>
+            <div class="modal-header">
+                <h2 class="modal-title"><strong>Anmelden</strong></h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="begin">Beginn:</label>
+                    <div class="col-lg-9">
+                        <h2 id="begin" ng-model="newParticipation.start">{{participateSlot.start}}</h2>
+                    </div>
+                    <label class="control-label col-lg-3" for="end">Ende:</label>
+                    <div class="col-lg-9">
+                        <h2 id="end" ng-model="newParticipation.end">{{participateSlot.end}}</h2>
+                    </div>
+                    <label class="control-label col-lg-3" for="remark">Vermerk:</label>
+                    <div class="col-lg-9">
+                        <input id="remark" class="form-control" type="text"
+                               placeholder="Geben Sie einen Vermerk für Ihre Teilnahme an." ng-model="newParticipation.remark"
+                               required ng-minlength="3" ng-maxlength="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3" for="email_notification_student">Emailnotifikation:</label>
+                    <div class="col-lg-9">
+                        <input id="email_notification_student" class="checkbox-inline mtp-checkbox" type="checkbox"
+                               value="email_notification_student" ng-model="newParticipation.email_notification_student">
+                        <a href="#" data-toggle="tooltip" data-placement="right"
+                           title="Soll bei Änderung der Sprechstunde eine E-Mail-Benachrichtigung erfolgen?">
+                            <div class="badge">?</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn mtp-icon-link" type="button" data-dismiss="modal"><i
+                        class="fa fa-close fa-lg mtp-icon mtp-icon-xl"></i></button>
+                <button class="btn mtp-icon-link" type="submit"><i class="fa fa-check fa-lg mtp-icon mtp-icon-xl"></i>
+                </button>
+            </div>
+            <pre>participateMeeting = {{participateMeeting | json}}</pre>
+            <pre>newParticipation = {{newParticipation | json}}</pre>
+            <pre>participateSlot = {{participateSlot | json}}</pre>
+        </form>
+    </div>
+</div>

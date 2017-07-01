@@ -35,8 +35,12 @@
         <div id="meetingContainerStudent" class="container" ng-show="studentHasMeetings()" style="margin-left: -14px;">
             <div class="panel-group">
                 <ng-include src="'../templates/templ_meetingpanelparticipant.html'"
-                            ng-repeat="meeting in studentMeetings"></ng-include>
+                            ng-repeat="meeting in studentMeetings | orderBy:'start'"></ng-include>
             </div>
+        </div>
+
+        <div id="cancelForm" class="modal fade">
+            <ng-include src="'../templates/form_participationcancel.html'"></ng-include>
         </div>
 
         <div class="well well-lg well-warn" ng-show="!studentHasMeetings()">
@@ -66,7 +70,7 @@
                             <i class="docent-selector-icon fa fa-search fa-lg"></i>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" ng-show="!docentIsSelected()">
                         <!-- ToDo: Make search field and warning/selected docent align each other -->
                         <div class="docent-selector-warning">
                             <i class="fa fa-info-circle fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
@@ -84,8 +88,8 @@
         <div id="meetingContainerDocent" class="container" ng-show="docentHasMeetings()"
              style="margin-left: -14px;">
             <div class="panel-group">
-                <ng-include src="'../templates/templ_meetingpanelparticipant.html'"
-                            ng-repeat="meeting in studentMeetings"></ng-include>
+                <ng-include src="'../templates/templ_meetingpanelparticipantselecteddocent.html'"
+                            ng-repeat="docentMeeting in selectedDocentMeetings | orderBy:'start'"></ng-include>
             </div>
         </div>
 
@@ -145,17 +149,12 @@
     </div>
 </nav>
 
-<!-- End of initially visible content -->
-<div id="cancelForm" class="modal fade">
-    <ng-include src="'../templates/form_participationcancel.html'"></ng-include>
-</div>
-
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script> <!-- Required for nearly every addon -->
 <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../bower_components/angular/angular.min.js"></script>
-<!--<script src="../bower_components/angular-messages/angular-messages.min.js"></script> <!-- Required for ngFabForm -->
-<!--<script src="../bower_components/angular-animate/angular-animate.min.js"></script> <!-- Required for ngFabForm -->
-<!--<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script> -->
+<!--<script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script>-->
 <!-- Angular extension for easier form handling -->
 <script src="./viewstudent.js"></script> <!-- Angular module code -->
 

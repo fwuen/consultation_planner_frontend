@@ -1,12 +1,7 @@
 <li ng-mouseenter="setSelectorClass($event)" ng-mouseleave="setSelectorClass($event)">
     <div class="docent-selector-icon fa fa-user fa-lg">
-        <!--TODO nicht funktionstüchtig
-        <h4 ng-repeat="docent in docents | filter:searchBox" class="docent-selector-name">
-            {{docent.firstname + ' ' + docent.lastname}}
-        </h4>
-        -->
     </div>
-    <div class="docent-selector-content">
+    <div class="docent-selector-content" ng-click="setSelectedDocentAndMeetings(docent)">
         <h4 class="docent-selector-name">
             {{docent.lastname + ', ' + docent.firstname }}
         </h4>

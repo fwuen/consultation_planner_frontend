@@ -90,13 +90,16 @@ function meetingsViewHandler() {
             if (aMeeting.has_passed == "true" || aMeeting.has_passed == 1) {
                 return "panel-passed";
             }
-            if (aMeeting.cancelled == "true" || aMeeting.cancelled == 1) {
+            if (aMeeting.cancelled == "true" || aMeeting.cancelled == 1 || aMeeting.unoccupiedSlots == 0) {
                 return "panel-cancelled";
             }
             if (aMeeting.hasOwnProperty('participation')) {
                 return "panel-participants";
             }
             return "panel-no-participants";
+        },
+        isBookable: function(aMeeting) {
+            return (aMeeting.cancelled != 1 && aMeeting.unoccupiedSlots != 0 && aMeeting.has_passed != 1);
         }
     }
 }
@@ -108,7 +111,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) 
     $scope.setCancelParticipation = function (aParticipation) {
         //$scope.cancelParticipation = aParticipation;
         $scope.cancelParticipation = angular.copy(aParticipation);
-    };
+    }
 
     $scope.studentHasMeetings = function() {
         return $scope.studentMeetings.length > 0;
@@ -116,54 +119,94 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) 
 
     $scope.submitCancelForm = submitCancelForm;
 
+    $http.get('http://localhost:8000/student/1/participation').then(function(response) {
+        $scope.studentMeetings = response.data;
+    })
+
     function submitCancelForm() {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8000/student/1/participation' + ($scope.cancelParticipation.id),
+            url: 'http://localhost:8000/student/1/participation/' + ($scope.cancelParticipation.id),
             headers: {'Content-Type': 'application/json'}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
         });
     }
 
-    /*
-    $http.get('meetingsTest.json').then(function(response) {
-        $scope.studentMeetings = response.data;
-    });*/
-
-    $http.get('http://localhost:8000/student/1/participation').then(function(response) {
-        $scope.studentMeetings = response.data;
-    })
-
 }
 
-function docentMeetingsController($scope, $http) {
+function docentMeetingsController($scope, $http, $window, MeetingsViewHandler) {
+    $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.docents = [];
     $scope.selectedDocent = {};
     $scope.selectedDocentMeetings = [];
+    $scope.setSelectedDocentAndMeetings = function (aDocent) {
+        $scope.selectedDocent = angular.copy(aDocent);
+        $http.get('http://localhost:8000/docent/' + aDocent.id + '/meeting/coalition').then(function (response) {
+            $scope.selectedDocentMeetings = response.data;
+        });
+    }
 
-    $http.get('http://localhost:8000/docent').then(function(response) {
+    $http.get('http://localhost:8000/docent').then(function (response) {
         $scope.docents = response.data;
     });
 
     $scope.searchTerm = String();
 
-    $scope.showDocentMeetingsWell = function() {
+    $scope.showDocentMeetingsWell = function () {
         // Show well only in case of selected docent not having any meetings
         return $scope.selectedDocentMeetings.length < 1 &&
-        !angular.equals($scope.selectedDocent, {});
+            !angular.equals($scope.selectedDocent, {});
     };
 
-    $scope.docentHasMeetings = function() {
+    $scope.docentHasMeetings = function () {
         return $scope.selectedDocentMeetings.length > 0;
     };
 
-    $scope.setSelectorClass = function(event) {
-        if(event.type === 'mouseenter') {
+    $scope.docentIsSelected = function() {
+        return !angular.equals($scope.selectedDocent, {});
+    };
+
+    $scope.setSelectorClass = function (event) {
+        if (event.type === 'mouseenter') {
             event.target.classList.add("docent-selector-hovered");
         }
-        if(event.type === 'mouseleave') {
+        if (event.type === 'mouseleave') {
             event.target.classList.remove("docent-selector-hovered");
         }
     };
+
+    $scope.newParticipation = {};
+    $scope.participateMeeting = {};
+    $scope.participateSlot = {};
+    $scope.setParticipateMeetingAndSlot = function (aMeeting, aSlot) {
+        $scope.participateMeeting = aMeeting;
+        $scope.participateSlot = aSlot;
+        $scope.newParticipation.meeting_id = $scope.participateMeeting.id;
+        $scope.newParticipation.slot_id = $scope.participateSlot.id;
+        $scope.newParticipation.start = aSlot.start;
+        $scope.newParticipation.end = aSlot.end;
+    };
+
+    $scope.submit = submit;
+
+    initCreationForm();
+
+    function initCreationForm() {
+        //TODO hier dynamisch die id vergeben für student
+        $scope.newParticipation.student_id = 1;
+        $scope.newParticipation.email_notification_student = false;
+        $scope.newParticipation.remark = String();
+    }
+
+    function submit() {
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8000/student/1/participation',
+            data: $scope.newParticipation,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (data) {
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html'
+        });
+    }
 }
