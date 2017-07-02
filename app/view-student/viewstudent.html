@@ -21,9 +21,9 @@
 <!-- Navbar -->
 <nav id="navHead" class="navbar navbar-inverse" style="border-radius: 0">
     <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="MeetTheProf Logo"></a>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="myNavbar" ng-controller="LogoutController">
         <ul class="nav navbar-nav navbar-right ">
-            <li><a class="mtp-icon-link" href="#"><span class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
+            <li><a class="mtp-icon-link" href ng-click="logout()"><span class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
         </ul>
     </div>
 </nav>
