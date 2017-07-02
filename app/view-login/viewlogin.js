@@ -31,7 +31,7 @@ function loginController($scope, $localStorage, $http) {
         }).then(function (response) {
                 $localStorage.auth = response.headers('Authorization');
                 var token = $localStorage.auth;
-                if (token.substring(50) === 's') {
+                if (token.charAt(50) === 's') {
                     window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
                 }
                 else {

@@ -131,17 +131,20 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     $scope.submitCancelForm = submitCancelForm;
     $scope.submitEditForm = submitEditForm;
 
+    var docentID = $localStorage.auth.substring(51);
     $http({
         method: 'GET',
-        url: 'http://localhost:8000/docent/1/meeting/coalition',
+        url: 'http://localhost:8000/docent/' + docentID + '/meeting/coalition',
         headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
+    }).then(function (response) {
+        $scope.meetings = response.data;
     });
 
     function submitCancelForm() {
         if ($scope.cancel_series) {
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
+                url: 'http://localhost:8000/docent/' + docentID + '/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
                 $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
@@ -151,7 +154,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             $scope.cancelMeeting.cancelled = 1;
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8000/docent/1/meeting/' + ($scope.cancelMeeting.id),
+                url: 'http://localhost:8000/docent/' + docentID + '/meeting/' + ($scope.cancelMeeting.id),
                 data: $scope.cancelMeeting,
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
@@ -163,7 +166,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     function submitEditForm() {
         $http({
             method: 'PUT',
-            url: 'http://localhost:8000/docent/1/meeting/' + ($scope.editMeeting.id),
+            url: 'http://localhost:8000/docent/' + docentID + '/meeting/' + ($scope.editMeeting.id),
             data: $scope.editMeeting,
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
@@ -191,6 +194,7 @@ function creationFormController($scope, $http, $window, ngFabForm, $localStorage
         $scope.newMeeting.description = String();
     }
 
+    var docentID = $localStorage.auth.substring(51);
     function submit() {
 
         if ($scope.newMeeting.has_slots === false || $scope.newMeeting.has_slots === 0) {
@@ -203,7 +207,7 @@ function creationFormController($scope, $http, $window, ngFabForm, $localStorage
         if ($scope.creationForm.$valid) {
             $http({
                 method: 'POST',
-                url: 'http://localhost:8000/docent/1/meeting',
+                url: 'http://localhost:8000/docent/' + docentID + '/meeting',
                 data: $scope.newMeeting,
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {

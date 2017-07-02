@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MeetTheProf.viewStudent', []);
+angular.module('MeetTheProf.viewStudent', ['ngStorage']);
 
 angular
     .module('MeetTheProf.viewStudent')
@@ -104,30 +104,34 @@ function meetingsViewHandler() {
     }
 }
 
-function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) {
+function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.studentMeetings = [];
     $scope.cancelParticipation = {};
     $scope.setCancelParticipation = function (aParticipation) {
         //$scope.cancelParticipation = aParticipation;
         $scope.cancelParticipation = angular.copy(aParticipation);
-    }
+    };
 
     $scope.studentHasMeetings = function() {
         return $scope.studentMeetings.length > 0;
-    }
+    };
 
     $scope.submitCancelForm = submitCancelForm;
 
-    $http.get('http://localhost:8000/student/1/participation').then(function(response) {
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8000/student/1/participation/',
+        headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
+    }).then(function (response) {
         $scope.studentMeetings = response.data;
-    })
+    });
 
     function submitCancelForm() {
         $http({
             method: 'DELETE',
             url: 'http://localhost:8000/student/1/participation/' + ($scope.cancelParticipation.id),
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
         });
@@ -135,19 +139,27 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler) 
 
 }
 
-function docentMeetingsController($scope, $http, $window, MeetingsViewHandler) {
+function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.docents = [];
     $scope.selectedDocent = {};
     $scope.selectedDocentMeetings = [];
     $scope.setSelectedDocentAndMeetings = function (aDocent) {
         $scope.selectedDocent = angular.copy(aDocent);
-        $http.get('http://localhost:8000/docent/' + aDocent.id + '/meeting/coalition').then(function (response) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8000/docent/' + aDocent.id + '/meeting/coalition',
+            headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
+        }).then(function (response) {
             $scope.selectedDocentMeetings = response.data;
         });
-    }
+    };
 
-    $http.get('http://localhost:8000/docent').then(function (response) {
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8000/docent',
+        headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
+    }).then(function (response) {
         $scope.docents = response.data;
     });
 
@@ -204,7 +216,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler) {
             method: 'POST',
             url: 'http://localhost:8000/student/1/participation',
             data: $scope.newParticipation,
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html'
         });
