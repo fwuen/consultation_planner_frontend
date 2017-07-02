@@ -32,6 +32,16 @@
     <div id="meetingPanelGroup" class="panel-group">
         <ng-include src="'../templates/templ_meetingpaneladmin.html'"></ng-include>
     </div>
+    <div class="well well-lg well-warn" ng-show="!hasMeetings()">
+        <div class="row">
+            <div class="col-lg-1">
+                <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
+            </div>
+            <div class="col-lg-11">
+                <p><strong>Sie haben derzeit keine Sprechstunden.</strong></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Button for creating a meeting -->
