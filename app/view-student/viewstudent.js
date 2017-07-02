@@ -117,11 +117,13 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
         return $scope.studentMeetings.length > 0;
     };
 
+    var studentID = $localStorage.auth.substring(51);
+
     $scope.submitCancelForm = submitCancelForm;
 
     $http({
         method: 'GET',
-        url: 'http://localhost:8000/student/1/participation/',
+        url: 'http://localhost:8000/student/' + studentID + '/participation/',
         headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
     }).then(function (response) {
         $scope.studentMeetings = response.data;
@@ -130,7 +132,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
     function submitCancelForm() {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8000/student/1/participation/' + ($scope.cancelParticipation.id),
+            url: 'http://localhost:8000/student/' + studentID + '/participation/' + ($scope.cancelParticipation.id),
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
@@ -202,19 +204,22 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
 
     $scope.submit = submit;
 
+    var studentID = $localStorage.auth.substring(51);
+
     initCreationForm();
 
     function initCreationForm() {
         //TODO hier dynamisch die id vergeben für student
-        $scope.newParticipation.student_id = 1;
+        $scope.newParticipation.student_id = studentID;
         $scope.newParticipation.email_notification_student = false;
         $scope.newParticipation.remark = String();
     }
 
+
     function submit() {
         $http({
             method: 'POST',
-            url: 'http://localhost:8000/student/1/participation',
+            url: 'http://localhost:8000/student/' + studentID + '/participation',
             data: $scope.newParticipation,
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
