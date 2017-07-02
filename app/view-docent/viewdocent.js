@@ -202,10 +202,8 @@ function creationFormController($scope, $http, $window, ngFabForm, $localStorage
     function submit() {
 
         if ($scope.newMeeting.has_slots === false || $scope.newMeeting.has_slots === 0) {
-            alert("keine slots");
             $scope.newMeeting.slots = 1;
         } else {
-            alert("ja zu slots");
             $scope.newMeeting.max_participants = 1;
         }
         if ($scope.creationForm.$valid) {
