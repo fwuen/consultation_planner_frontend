@@ -1,6 +1,8 @@
 logs/*
 !.gitkeep
 node_modules
+!node_modules/boostrap
+!node_modules/font-awesome
 tmp
 .DS_Store
 .idea
