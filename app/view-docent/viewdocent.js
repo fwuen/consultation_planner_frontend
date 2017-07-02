@@ -6,7 +6,8 @@ angular
     .module('MeetTheProf.viewDocent')
     .factory('MeetingsViewHandler', meetingsViewHandler)
     .controller('MeetingsController', meetingsController)
-    .controller('CreationFormController', creationFormController);
+    .controller('CreationFormController', creationFormController)
+    .controller('LogoutController', logoutController);
 
 function meetingsViewHandler() {
     return {
@@ -217,5 +218,18 @@ function creationFormController($scope, $http, $window, ngFabForm, $localStorage
                 $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
             });
         }
+    }
+}
+
+function logoutController($scope, $http, $localStorage, $window) {
+
+    $scope.logout = function() {
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8000/logout',
+            headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
+        }).then(function (response) {
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-login/viewlogin.html'
+        });
     }
 }
