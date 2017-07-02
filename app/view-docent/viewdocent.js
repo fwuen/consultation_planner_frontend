@@ -112,6 +112,9 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     };
 
     $scope.meetings = [];
+    $scope.hasMeetings = function() {
+        return $scope.meetings.length > 0;
+    }
 
     $scope.cancelMeeting = {};
     $scope.setCancelMeeting = function (aMeeting) {
