@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css" media="screen">
 
     <!-- Loading ngFabForm styles -->
-    <link rel="stylesheet" href="validation.css">
+    <link rel="stylesheet" href="../css/validation.css">
 </head>
 <body ng-controller="MeetingsController">
 <!-- Navbar -->
@@ -23,11 +23,22 @@
     <a class="navbar-brand" href="#"><img src="../img/logo.png" alt="MeetTheProf Logo"></a>
     <div class="collapse navbar-collapse" id="myNavbar" ng-controller="LogoutController">
         <ul class="nav navbar-nav navbar-right ">
-            <li><a class="mtp-icon-link" href ng-click="logout()"><span class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
+            <li class="dropdown"><a class=" dropdown-toggle mtp-icon-link" href="#" data-toggle="dropdown"><span
+                    class="fa fa-gear mtp-icon"></span></a>
+                <ul class="dropdown-menu">
+                    <li><label class="control-label" for="showCancelled">Abgesagt:</label><input id="showCancelled"
+                                                                                                 class="checkbox-inline mtp-checkbox"
+                                                                                                 type="checkbox"
+                                                                                                 value="showCancelled"
+                                                                                                 ng-click="toggleCancelled()">
+                    </li>
+                </ul>
+            </li>
+            <li><a class="mtp-icon-link" href ng-click="logout()"><span
+                    class="glyphicon glyphicon-log-out mtp-icon"></span></a></li>
         </ul>
     </div>
 </nav>
-
 <div id="meetingContainer" class="container container-if-fixed-footer">
     <div id="meetingPanelGroup" class="panel-group">
         <ng-include src="'../templates/templ_meetingpaneladmin.html'"></ng-include>

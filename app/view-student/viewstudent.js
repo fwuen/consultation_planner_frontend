@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MeetTheProf.viewStudent', ['ngStorage']);
+angular.module('MeetTheProf.viewStudent', ['ngStorage', 'ngFabForm']);
 
 angular
     .module('MeetTheProf.viewStudent')
@@ -106,7 +106,7 @@ function meetingsViewHandler() {
     }
 }
 
-function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage) {
+function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.studentMeetings = [];
     $scope.cancelParticipation = {};
@@ -141,9 +141,13 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
         });
     }
 
+    $scope.fabFormOptions = {
+        validationsTemplate: 'validation.html'
+    };
+
 }
 
-function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage) {
+function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
     $scope.docents = [];
     $scope.selectedDocent = {};
@@ -228,6 +232,10 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html'
         });
     }
+
+    $scope.fabFormOptions = {
+        validationsTemplate: 'validation.html'
+    };
 }
 
 function logoutController($scope, $http, $localStorage, $window) {

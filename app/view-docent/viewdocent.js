@@ -88,7 +88,7 @@ function meetingsViewHandler() {
             return result;
         },
         hasParticipants: function (aMeeting) {
-            return (parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length != 0);
+            return (parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length !== 0);
         },
         getPanelType: function (aMeeting) {
             if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
@@ -97,7 +97,7 @@ function meetingsViewHandler() {
             if (aMeeting.cancelled === "true" || aMeeting.cancelled === 1) {
                 return "panel-cancelled";
             }
-            if ((parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length != 0)) {
+            if ((parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length !== 0)) {
                 return "panel-participants";
             }
             return "panel-no-participants";
@@ -115,7 +115,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     $scope.meetings = [];
     $scope.hasMeetings = function() {
         return $scope.meetings.length > 0;
-    }
+    };
 
     $scope.cancelMeeting = {};
     $scope.setCancelMeeting = function (aMeeting) {
@@ -177,6 +177,19 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
         });
     }
+
+    $scope.showCancelled = false;
+    $scope.cancelledFilter = function() {
+        if($scope.showCancelled) {
+            return {'cancelled': '0'};
+        }
+        else {
+            return {};
+        }
+    };
+    $scope.toggleCancelled = function() {
+        $scope.showCancelled = !$scope.showCancelled;
+    };
 }
 
 function creationFormController($scope, $http, $window, ngFabForm, $localStorage) {

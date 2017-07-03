@@ -1,0 +1,47 @@
+<div class="validation"
+     ng-show="attrs.required==''|| attrs.required">
+    <ul class="list-unstyled validation-errors"
+        ng-messages="field.$error"
+        ng-show="field.$invalid && (field.$touched || field.$dirty || form.$triedSubmit)">
+        <li ng-message="required">Feld wird benötigt</li>
+        <li ng-message="ngFabEnsureExpression">Keine gültige Bedingung</li>
+        <li ng-message="password">Bitte gültiges Passwort eingeben>
+        </li>
+        <li ng-message="email">Bitte gültige Email eingeben</li>
+        <li ng-message="pattern">Ungültiges Eingabeformat</li>
+        <li ng-message="date">Bitte gültiges Datum eingeben</li>
+        <li ng-message="time">Bitte gültige Zeit eingeben</li>
+        <li ng-message="datetime">Bitte gültiges Datum und gültige Zeit eingeben</li>
+        <li ng-message="datetime-local">Bitte gültiges Datum und gültige Zeit eingeben</li>
+        <li ng-message="number">Dieses Feld muss numerisch sein</li>
+        <li ng-message="color">Bitte gültige Farbe eingeben</li>
+        <li ng-message="range">Bitte gültige Spanne eingeben</li>
+        <li ng-message="month">Bitte gültigen Monat eingeben</li>
+        <li ng-message="url">Bitte gültige URL eingeben</li>
+        <li ng-message="file">Ungültige Datei</li>
+        <li ng-message="minlength">Bitte mindestens {{ attrs.minlength }} Zeichen eingeben</li>
+        <li ng-message="maxlength">Bitte höchstens {{ attrs.maxlength }} Zeichen eingeben</li>
+        <li ng-message="ngFabMatch">Das {{ attrs.type ==='password'? 'passwords' : 'values' }} muss übereinstimmen</li>
+        <li ng-if="attrs.type == 'time' "
+            ng-message="min">Die eingegebene Zeit muss nach {{ attrs.min |date: 'HH:MM' }} liegen
+        </li>
+        <li ng-message="max"
+            ng-if="attrs.type == 'time' ">Die eingegebene Zeit muss vor {{attrs.max |date: 'HH:MM'}} liegen
+        </li>
+        <li ng-message="min"
+            ng-if="attrs.type == 'date' ">Das eingegebene Datum muss nach {{attrs.min |date:'dd.MM.yyyy'}} liegen
+        </li>
+        <li ng-message="max"
+            ng-if="attrs.type == 'date' ">Das eingegebene Datum muss vor {{attrs.max |date: 'dd.MM.yyyy'}} liegen
+        </li>
+        <li ng-message="min"
+            ng-if="attrs.type === 'number' ">Die eingegebene Zahl muss mindestens {{attrs.min}} sein
+          </li>
+        <li ng-message="max"
+            ng-if="attrs.type === 'number' ">Die eingegebene Zahl darf maximal {{attrs.max}} sein
+        </li>
+    </ul>
+    <div class="validation-success"
+         ng-show="field.$valid && !field.$invalid">
+    </div>
+</div>
