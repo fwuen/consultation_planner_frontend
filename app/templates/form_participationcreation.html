@@ -9,11 +9,11 @@
                 <div class="form-group">
                     <label class="control-label col-lg-3" for="begin" style="color:black;">Beginn:</label>
                     <div class="col-lg-9">
-                        <h2 id="begin" ng-model="newParticipation.start" style="color:black;">{{participateSlot.start}}</h2>
+                        <h2 id="begin" ng-model="newParticipation.start" style="color:black;">{{meetingsViewHandler.getDayMonthYearHourMinutes(participateSlot.start)}}</h2>
                     </div>
                     <label class="control-label col-lg-3" for="end" style="color:black;">Ende:</label>
                     <div class="col-lg-9">
-                        <h2 id="end" ng-model="newParticipation.end" style="color:black;">{{participateSlot.end}}</h2>
+                        <h2 id="end" ng-model="newParticipation.end" style="color:black;">{{meetingsViewHandler.getDayMonthYearHourMinutes(participateSlot.end)}}</h2>
                     </div>
                     <label class="control-label col-lg-3" for="remark" style="color:black;">Vermerk:</label>
                     <div class="col-lg-9">
