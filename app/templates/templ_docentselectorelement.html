@@ -1,7 +1,7 @@
-<li ng-mouseenter="setSelectorClass($event)" ng-mouseleave="setSelectorClass($event)">
+<li ng-mouseenter="handleSelectorEvent($event, docent)" ng-mouseleave="handleSelectorEvent($event, docent)" ng-click="handleSelectorEvent($event, docent)">
     <div class="docent-selector-icon fa fa-user fa-lg">
     </div>
-    <div class="docent-selector-content" ng-click="setSelectedDocentAndMeetings(docent)">
+    <div class="docent-selector-content">
         <h4 class="docent-selector-name">
             {{docent.lastname + ', ' + docent.firstname }}
         </h4>

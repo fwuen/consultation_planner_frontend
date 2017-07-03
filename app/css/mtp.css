@@ -450,3 +450,32 @@ h1 strong {
     box-shadow: none;
     outline: none;
 }
+.docent-selector-selected {
+    position: relative;
+    background: #34495E;
+    background-size: 16px 16px;
+    color: white;
+    border-radius: 0 6px 0 0;
+    padding: 19px 25px 20px;
+}
+.docent-selector-selected-field {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 23px;
+    padding: 5px 0;
+    text-indent: 0;
+    box-shadow: none;
+    outline: none;
+}
+.no-padding-left {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+.no-padding-right {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+}

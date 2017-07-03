@@ -63,20 +63,24 @@
         <div id="docentSelectorContainer" class="container" style="margin-left: -14px;">
             <div class="docent-selector">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 no-padding-right">
                         <div class="docent-selector-search">
                             <input class="docent-selector-search-field" type="search" value=""
                                    placeholder="Dozent suchen..." ng-model="searchTerm"/>
                             <i class="docent-selector-icon fa fa-search fa-lg"></i>
                         </div>
                     </div>
-                    <div class="col-lg-8" ng-show="isDataLoaded && !docentIsSelected()">
+                    <div class="col-lg-8 no-padding-left">
                         <!-- ToDo: Make search field and warning/selected docent align each other -->
-                        <div class="docent-selector-warning">
+                        <div class="docent-selector-warning" ng-show="isDataLoaded && !docentIsSelected()">
                             <i class="fa fa-info-circle fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
                             <p class="docent-selector-warning-field">Es ist kein Dozent ausgewählt.</p>
                         </div>
                         <!-- ToDo: Add selected docent -->
+                        <div class="docent-selector-selected" ng-show="isDataLoaded && docentIsSelected()">
+                            <i class="fa fa-user fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
+                            <p class="docent-selector-selected-field">{{selectedDocent.lastname + ', ' + selectedDocent.firstname}}</p>
+                        </div>
                     </div>
                 </div>
                 <ul ng-show="searchTerm != ''">

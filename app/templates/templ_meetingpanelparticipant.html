@@ -53,7 +53,7 @@
                     Emailbenachrichtigung aktiviert:
                 </div>
                 <div class="col-lg-6">
-                    {{meeting.participation.email_notification_student}}
+                    {{meetingsViewHandler.convertIntToYesNo(meeting.participation.email_notification_student)}}
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">

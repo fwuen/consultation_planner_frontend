@@ -101,6 +101,14 @@ function meetingsViewHandler() {
                 return "panel-participants";
             }
             return "panel-no-participants";
+        },
+        convertIntToYesNo: function(aNumber) {
+            if(aNumber === 0) {
+                return 'Nein';
+            }
+            else {
+                return 'Ja';
+            }
         }
     }
 }

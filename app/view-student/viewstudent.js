@@ -102,6 +102,14 @@ function meetingsViewHandler() {
         },
         isBookable: function(aMeeting) {
             return (aMeeting.cancelled != 1 && aMeeting.unoccupiedSlots != 0 && aMeeting.has_passed != 1);
+        },
+        convertIntToYesNo: function(aNumber) {
+            if(aNumber === 0) {
+                return 'Nein';
+            }
+            else {
+                return 'Ja';
+            }
         }
     }
 }
@@ -159,6 +167,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
     $scope.selectedDocentMeetings = [];
     $scope.setSelectedDocentAndMeetings = function (aDocent) {
         $scope.isDataLoaded = false;
+        $scope.searchTerm = String();
         $scope.selectedDocent = angular.copy(aDocent);
         $http({
             method: 'GET',
@@ -197,12 +206,16 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
         return !angular.equals($scope.selectedDocent, {});
     };
 
-    $scope.setSelectorClass = function (event) {
+    $scope.handleSelectorEvent = function (event, docent) {
         if (event.type === 'mouseenter') {
             event.target.classList.add("docent-selector-hovered");
         }
         if (event.type === 'mouseleave') {
             event.target.classList.remove("docent-selector-hovered");
+        }
+        if (event.type === 'click') {
+            event.target.classList.remove("docent-selector-hovered");
+            $scope.setSelectedDocentAndMeetings(docent)
         }
     };
 
