@@ -11,6 +11,12 @@ angular
 ;
 
 function meetingsViewHandler() {
+    function isParticipateable(aMeeting) {
+        return (aMeeting.cancelled !== 1
+            && aMeeting.unoccupiedSlots !== 0
+            && aMeeting.has_passed !== 1);
+    }
+
     return {
         getMonthName: function (aDatetime) {
             var datetime = new Date(aDatetime);
@@ -89,10 +95,10 @@ function meetingsViewHandler() {
             return result;
         },
         getPanelType: function (aMeeting) {
-            if (aMeeting.has_passed == "true" || aMeeting.has_passed == 1) {
+            if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
                 return "panel-passed";
             }
-            if (aMeeting.cancelled == "true" || aMeeting.cancelled == 1 || aMeeting.unoccupiedSlots == 0) {
+            if ( !isParticipateable(aMeeting)) {
                 return "panel-cancelled";
             }
             if (aMeeting.hasOwnProperty('participation')) {
@@ -100,9 +106,7 @@ function meetingsViewHandler() {
             }
             return "panel-no-participants";
         },
-        isBookable: function(aMeeting) {
-            return (aMeeting.cancelled != 1 && aMeeting.unoccupiedSlots != 0 && aMeeting.has_passed != 1);
-        },
+        isParticipateable: isParticipateable,
         convertIntToYesNo: function(aNumber) {
             if(aNumber === 0) {
                 return 'Nein';
@@ -116,6 +120,8 @@ function meetingsViewHandler() {
 
 function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
+
+    $scope.now = new Date();
 
     $scope.studentMeetings = [];
     $scope.cancelParticipation = {};
