@@ -1,5 +1,5 @@
-<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.id}}" style="margin-bottom: 20px !important;">
-    <div data-toggle="collapse" data-target="#meeting{{meeting.id}}" href="#meeting{{meeting.id}}">
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(meeting)}}" id="panel{{meeting.participation.id}}" style="margin-bottom: 10px !important;">
+    <div data-toggle="collapse" data-target="#meeting{{meeting.participation.id}}" href="#meeting{{meeting.participation.id}}">
         <div class="row">
             <div class="col-lg-1">
                 <time class="icon">
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div id="meeting{{meeting.id}}" class="panel-collapse collapse">
+    <div id="meeting{{meeting.participation.id}}" class="panel-collapse collapse">
         <div class="container-fluid">
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
