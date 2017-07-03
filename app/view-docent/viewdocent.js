@@ -117,6 +117,8 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
         return $scope.meetings.length > 0;
     };
 
+    $scope.isDataLoaded = false;
+
     $scope.cancelMeeting = {};
     $scope.setCancelMeeting = function (aMeeting) {
         $scope.cancelMeeting = angular.copy(aMeeting);
@@ -142,9 +144,11 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
         headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
     }).then(function (response) {
         $scope.meetings = response.data;
+        $scope.isDataLoaded = true;
     });
 
     function submitCancelForm() {
+        $scope.isDataLoaded = false;
         if ($scope.cancel_series) {
             $http({
                 method: 'PUT',
@@ -168,6 +172,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
     }
 
     function submitEditForm() {
+        $scope.isDataLoaded = false;
         $http({
             method: 'PUT',
             url: 'http://localhost:8000/docent/' + docentID + '/meeting/' + ($scope.editMeeting.id),

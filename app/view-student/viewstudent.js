@@ -108,12 +108,14 @@ function meetingsViewHandler() {
 
 function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
+
     $scope.studentMeetings = [];
     $scope.cancelParticipation = {};
     $scope.setCancelParticipation = function (aParticipation) {
-        //$scope.cancelParticipation = aParticipation;
         $scope.cancelParticipation = angular.copy(aParticipation);
     };
+
+    $scope.isDataLoaded = false;
 
     $scope.studentHasMeetings = function() {
         return $scope.studentMeetings.length > 0;
@@ -129,6 +131,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
         headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
     }).then(function (response) {
         $scope.studentMeetings = response.data;
+        $scope.isDataLoaded = true;
     });
 
     function submitCancelForm() {
@@ -138,6 +141,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+            $scope.isDataLoaded = true;
         });
     }
 
@@ -149,10 +153,12 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
 
 function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $localStorage, ngFabForm) {
     $scope.meetingsViewHandler = MeetingsViewHandler;
+
     $scope.docents = [];
     $scope.selectedDocent = {};
     $scope.selectedDocentMeetings = [];
     $scope.setSelectedDocentAndMeetings = function (aDocent) {
+        $scope.isDataLoaded = false;
         $scope.selectedDocent = angular.copy(aDocent);
         $http({
             method: 'GET',
@@ -160,8 +166,11 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (response) {
             $scope.selectedDocentMeetings = response.data;
+            $scope.isDataLoaded = true;
         });
     };
+
+    $scope.isDataLoaded = false;
 
     $http({
         method: 'GET',
@@ -169,6 +178,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
         headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
     }).then(function (response) {
         $scope.docents = response.data;
+        $scope.isDataLoaded = true;
     });
 
     $scope.searchTerm = String();
@@ -223,6 +233,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
 
 
     function submit() {
+        $scope.isDataLoaded = false;
         $http({
             method: 'POST',
             url: 'http://localhost:8000/student/' + studentID + '/participation',
@@ -230,6 +241,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
             $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html'
+            $scope.isDataLoaded = true;
         });
     }
 

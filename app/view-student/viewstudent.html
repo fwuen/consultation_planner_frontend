@@ -43,7 +43,7 @@
             <ng-include src="'../templates/form_participationcancel.html'"></ng-include>
         </div>
 
-        <div class="well well-lg well-warn" ng-show="!studentHasMeetings()">
+        <div class="well well-lg well-warn" ng-show="isDataLoaded && !studentHasMeetings()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
@@ -70,7 +70,7 @@
                             <i class="docent-selector-icon fa fa-search fa-lg"></i>
                         </div>
                     </div>
-                    <div class="col-lg-8" ng-show="!docentIsSelected()">
+                    <div class="col-lg-8" ng-show="isDataLoaded && !docentIsSelected()">
                         <!-- ToDo: Make search field and warning/selected docent align each other -->
                         <div class="docent-selector-warning">
                             <i class="fa fa-info-circle fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <div class="well well-lg well-warn" ng-show="showDocentMeetingsWell()">
+        <div class="well well-lg well-warn" ng-show="isDataLoaded && showDocentMeetingsWell()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
@@ -154,7 +154,7 @@
 <script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script>-->
+<script src="../bower_components/ng-fab-form/dist/ng-fab-form.min.js"></script>
 <!-- Angular extension for easier form handling -->
 <script src="./viewstudent.js"></script> <!-- Angular module code -->
 <script src="../bower_components/ngstorage/ngStorage.min.js"></script>
