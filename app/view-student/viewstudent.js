@@ -200,7 +200,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
             url: 'http://localhost:8000/student/' + studentID + '/participation/' + ($scope.cancelParticipation.id),
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-student/viewstudent.html';
             $scope.isDataLoaded = true;
         });
     }
@@ -316,7 +316,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
             data: $scope.newParticipation,
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-student/viewstudent.html';
             $scope.isDataLoaded = true;
         });
     }
@@ -334,7 +334,7 @@ function logoutController($scope, $http, $localStorage, $window) {
             url: 'http://localhost:8000/logout',
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (response) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-login/viewlogin.html';
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-login/viewlogin.html';
         });
     }
 }
