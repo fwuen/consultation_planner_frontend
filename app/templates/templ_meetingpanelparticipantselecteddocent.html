@@ -1,5 +1,10 @@
-<div class="panel mtp-panel {{meetingsViewHandler.getPanelType(docentMeeting)}}" id="panel{{docentMeeting.id}}" style="margin-bottom: 10px !important;">
-    <div data-toggle="collapse" data-target="#docentMeeting{{docentMeeting.id}}" href="#docentMeeting{{docentMeeting.id}}">
+<div class="panel mtp-panel {{meetingsViewHandler.getPanelTypeDocent(docentMeeting)}}" id="panel{{docentMeeting.id}}"
+     style="margin-bottom: 10px !important;">
+    <div data-toggle="collapse" data-target="#docentMeeting{{docentMeeting.id}}"
+         href="#docentMeeting{{docentMeeting.id}}">
+        <pre>hasPassed = {{meetingsViewHandler.hasPassed(docentMeeting)}}</pre>
+        <pre>isCancelled = {{meetingsViewHandler.isCancelled(docentMeeting)}}</pre>
+        <pre>hasSlots = {{meetingsViewHandler.hasSlots(docentMeeting)}}</pre>
         <div class="row">
             <div class="col-lg-1">
                 <time class="icon">
@@ -50,7 +55,7 @@
             <div class="row ng-hide" style="margin-bottom: 10px; margin-top: 10px;"
                  ng-show="meetingsViewHandler.isParticipateable(docentMeeting)">
                 <div class="col-lg-6">
-                    Slots:
+                    Anmeldung:
                 </div>
                 <div class="col-lg-6">
                     <table class="table table-condensed">
@@ -58,17 +63,35 @@
                         <tr>
                             <th>Beginn</th>
                             <th>Ende</th>
-                            <th>Anmeldung</th>
+                            <th></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="ng-hide" ng-show="meetingsViewHandler.hasSlots(docentMeeting)">
                         <tr ng-repeat="slot in docentMeeting.unoccupiedSlots track by $index">
                             <td>{{meetingsViewHandler.getHoursAndMinutes(slot.start)}}</td>
                             <td>{{meetingsViewHandler.getHoursAndMinutes(slot.end)}}</td>
-                            <td><button id="btnParticipateMeeting" class="btn mtp-panel-icon-link" data-target="#creationForm"
-                                        data-toggle="modal" ng-click="setParticipateMeetingAndSlot(docentMeeting, slot)" style="margin-right:37px;"><i
-                                    class="fa fa-check fa-lg mtp-icon-xl"></i>
-                            </button></td>
+                            <td>
+                                <button class="btn mtp-panel-icon-link"
+                                        data-target="#creationForm"
+                                        data-toggle="modal" ng-click="setParticipateMeetingAndSlot(docentMeeting, slot)"
+                                        style="margin-right:37px;"><i
+                                        class="fa fa-check fa-lg mtp-icon-xl"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody class="ng-hide" ng-show="!meetingsViewHandler.hasSlots(docentMeeting)">
+                        <tr>
+                            <td>{{meetingsViewHandler.getHoursAndMinutes(docentMeeting.start)}}</td>
+                            <td>{{meetingsViewHandler.getHoursAndMinutes(docentMeeting.end)}}</td>
+                            <td>
+                                <button class="btn mtp-panel-icon-link"
+                                        data-target="#creationForm"
+                                        data-toggle="modal" ng-click="setParticipateMeeting(docentMeeting)"
+                                        style="margin-right:37px;"><i
+                                        class="fa fa-check fa-lg mtp-icon-xl"></i>
+                                </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

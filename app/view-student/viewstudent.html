@@ -43,7 +43,7 @@
             <ng-include src="'../templates/form_participationcancel.html'"></ng-include>
         </div>
 
-        <div class="well well-lg well-warn" ng-show="isDataLoaded && !studentHasMeetings()">
+        <div class="well well-lg well-warn ng-hide" ng-show="isDataLoaded && !studentHasMeetings()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>
@@ -71,13 +71,11 @@
                         </div>
                     </div>
                     <div class="col-lg-8 no-padding-left">
-                        <!-- ToDo: Make search field and warning/selected docent align each other -->
-                        <div class="docent-selector-warning" ng-show="isDataLoaded && !docentIsSelected()">
+                        <div class="docent-selector-warning ng-hide" ng-show="isDataLoaded && !docentIsSelected()">
                             <i class="fa fa-info-circle fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
                             <p class="docent-selector-warning-field">Es ist kein Dozent ausgewählt.</p>
                         </div>
-                        <!-- ToDo: Add selected docent -->
-                        <div class="docent-selector-selected" ng-show="isDataLoaded && docentIsSelected()">
+                        <div class="docent-selector-selected ng-hide" ng-show="isDataLoaded && docentIsSelected()">
                             <i class="fa fa-user fa-lg mtp-icon-xl" style="padding: 2px 22px 0 0; float: left;"></i>
                             <p class="docent-selector-selected-field">{{selectedDocent.lastname + ', ' + selectedDocent.firstname}}</p>
                         </div>
@@ -97,7 +95,7 @@
             </div>
         </div>
 
-        <div class="well well-lg well-warn" ng-show="isDataLoaded && showDocentMeetingsWell()">
+        <div class="well well-lg well-warn ng-hide" ng-show="isDataLoaded && showDocentMeetingsWell()">
             <div class="row">
                 <div class="col-lg-1">
                     <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>

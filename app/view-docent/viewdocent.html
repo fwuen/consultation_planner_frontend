@@ -44,7 +44,7 @@
     <div id="meetingPanelGroup" class="panel-group">
         <ng-include src="'../templates/templ_meetingpaneladmin.html'"></ng-include>
     </div>
-    <div class="well well-lg well-warn" ng-show="isDataLoaded && !hasMeetings()">
+    <div class="well well-lg well-warn ng-hide" ng-show="isDataLoaded && !hasMeetings()">
         <div class="row">
             <div class="col-lg-1">
                 <i class="fa fa-info-circle mtp-icon mtp-icon-xl"></i>

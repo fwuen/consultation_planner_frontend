@@ -11,10 +11,45 @@ angular
 ;
 
 function meetingsViewHandler() {
+    function hasPassed(aMeeting) {
+        if(aMeeting.hasOwnProperty('has_passed')) {
+            return aMeeting.has_passed == 1;
+        }
+
+        return false;
+    }
+
+    function isCancelled(aMeeting) {
+        if(aMeeting.hasOwnProperty('cancelled')) {
+            return aMeeting.cancelled == 1;
+        }
+
+        return false;
+    }
+
+    function hasSlots(aMeeting) {
+        if (aMeeting.hasOwnProperty('slots')) {
+            return aMeeting.slots > 1;
+        }
+
+        return false;
+    }
+
     function isParticipateable(aMeeting) {
-        return (aMeeting.cancelled != 1
-            && aMeeting.unoccupiedSlots != 0
-            && aMeeting.has_passed != 1);
+        var result = true;
+
+        result = result && !isCancelled(aMeeting);
+
+        if (hasSlots(aMeeting)) {
+            if (aMeeting.hasOwnProperty('unoccupiedSlots')) {
+                result = result && (aMeeting.unoccupiedSlots.length > 0);
+            }
+        }
+        else {
+            result = result && (aMeeting.max_participants > aMeeting.participants_count);
+        }
+
+        return result;
     }
 
     return {
@@ -66,7 +101,6 @@ function meetingsViewHandler() {
             var datetime = new Date(aDatetime);
 
             return datetime.getDate().toString().length === 2 ? datetime.getDate() : ("0" + datetime.getDate());
-            //return datetime.getDate();
         },
         getHoursAndMinutes: function (aDatetime) {
             var datetime = new Date(aDatetime);
@@ -94,11 +128,20 @@ function meetingsViewHandler() {
 
             return result;
         },
-        getPanelType: function (aMeeting) {
-            if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
+        getPanelTypeStudent: function(aMeeting) {
+            if (hasPassed(aMeeting)) {
                 return "panel-passed";
             }
-            if ( !isParticipateable(aMeeting)) {
+            if(isCancelled(aMeeting)) {
+                return 'panel-cancelled';
+            }
+            return "panel-participants";
+        },
+        getPanelTypeDocent: function (aMeeting) {
+            if (hasPassed(aMeeting)) {
+                return "panel-passed";
+            }
+            if (!isParticipateable(aMeeting)) {
                 return "panel-cancelled";
             }
             if (aMeeting.hasOwnProperty('participation')) {
@@ -107,8 +150,11 @@ function meetingsViewHandler() {
             return "panel-no-participants";
         },
         isParticipateable: isParticipateable,
-        convertIntToYesNo: function(aNumber) {
-            if(aNumber === 0) {
+        hasSlots: hasSlots,
+        isCancelled: isCancelled,
+        hasPassed: hasPassed,
+        convertIntToYesNo: function (aNumber) {
+            if (aNumber === 0) {
                 return 'Nein';
             }
             else {
@@ -131,7 +177,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
 
     $scope.isDataLoaded = false;
 
-    $scope.studentHasMeetings = function() {
+    $scope.studentHasMeetings = function () {
         return $scope.studentMeetings.length > 0;
     };
 
@@ -208,7 +254,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
         return $scope.selectedDocentMeetings.length > 0;
     };
 
-    $scope.docentIsSelected = function() {
+    $scope.docentIsSelected = function () {
         return !angular.equals($scope.selectedDocent, {});
     };
 
@@ -229,12 +275,24 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
     $scope.participateMeeting = {};
     $scope.participateSlot = {};
     $scope.setParticipateMeetingAndSlot = function (aMeeting, aSlot) {
+        $scope.newparticipation = {};
+
         $scope.participateMeeting = aMeeting;
         $scope.participateSlot = aSlot;
+
         $scope.newParticipation.meeting_id = $scope.participateMeeting.id;
         $scope.newParticipation.slot_id = $scope.participateSlot.id;
         $scope.newParticipation.start = aSlot.start;
         $scope.newParticipation.end = aSlot.end;
+    };
+    $scope.setParticipateMeeting = function (aMeeting) {
+        $scope.newparticipation = {};
+
+        $scope.participateMeeting = aMeeting;
+
+        $scope.newParticipation.meeting_id = $scope.participateMeeting.id;
+        $scope.newParticipation.start = aMeeting.start;
+        $scope.newParticipation.end = aMeeting.end;
     };
 
     $scope.submit = submit;
@@ -244,7 +302,6 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
     initCreationForm();
 
     function initCreationForm() {
-        //TODO hier dynamisch die id vergeben für student
         $scope.newParticipation.student_id = studentID;
         $scope.newParticipation.email_notification_student = false;
         $scope.newParticipation.remark = String();
@@ -259,7 +316,7 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
             data: $scope.newParticipation,
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html'
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
             $scope.isDataLoaded = true;
         });
     }
@@ -271,13 +328,13 @@ function docentMeetingsController($scope, $http, $window, MeetingsViewHandler, $
 
 function logoutController($scope, $http, $localStorage, $window) {
 
-    $scope.logout = function() {
+    $scope.logout = function () {
         $http({
             method: 'POST',
             url: 'http://localhost:8000/logout',
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (response) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-login/viewlogin.html'
+            $window.location.href = 'http://localhost:63342/frontend_new/app/view-login/viewlogin.html';
         });
     }
 }
