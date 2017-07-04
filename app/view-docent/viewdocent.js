@@ -90,6 +90,12 @@ function meetingsViewHandler() {
         hasParticipants: function (aMeeting) {
             return (parseInt(aMeeting.participants_count) > 0) || (aMeeting.participating_students.length !== 0);
         },
+        hasSlots: function(aMeeting) {
+            if(aMeeting.hasOwnProperty('slots')) {
+                return aMeeting.slots > 1;
+            }
+            return false;
+        },
         getPanelType: function (aMeeting) {
             if (aMeeting.has_passed === "true" || aMeeting.has_passed === 1) {
                 return "panel-passed";

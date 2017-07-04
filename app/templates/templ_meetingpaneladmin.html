@@ -40,7 +40,7 @@
                     {{meetingsViewHandler.getDayMonthYearHourMinutes(meeting.last_enrollment)}}
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+            <div class="row ng-hide" ng-show="meetingsViewHandler.hasSlots(meeting)" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
                     Slots:
                 </div>
@@ -48,7 +48,7 @@
                     {{meeting.slots}}
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+            <div class="row ng-hide" ng-show="!meetingsViewHandler.hasSlots(meeting)" style="margin-bottom: 10px; margin-top: 10px;">
                 <div class="col-lg-6">
                     Maximale Teilnehmerzahl:
                 </div>
