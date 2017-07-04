@@ -163,7 +163,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
                 url: 'http://localhost:8000/docent/' + docentID + '/meeting/' + ($scope.cancelMeeting.id) + '/cancelseries',
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
-                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
+                $window.location.href = 'http://localhost:80/frontend_new/app/view-docent/viewdocent.html';
             });
         }
         else {
@@ -174,7 +174,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
                 data: $scope.cancelMeeting,
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
-                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
+                $window.location.href = 'http://localhost:80/frontend_new/app/view-docent/viewdocent.html';
             });
         }
     }
@@ -187,7 +187,7 @@ function meetingsController($scope, $http, $window, MeetingsViewHandler, ngFabFo
             data: $scope.editMeeting,
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-docent/viewdocent.html';
         });
     }
 
@@ -239,7 +239,7 @@ function creationFormController($scope, $http, $window, ngFabForm, $localStorage
                 data: $scope.newMeeting,
                 headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
             }).then(function (data) {
-                $window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
+                $window.location.href = 'http://localhost:80/frontend_new/app/view-docent/viewdocent.html';
             });
         }
     }
@@ -253,7 +253,7 @@ function logoutController($scope, $http, $localStorage, $window) {
             url: 'http://localhost:8000/logout',
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (response) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-login/viewlogin.html'
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-login/viewlogin.html'
         });
     }
 }

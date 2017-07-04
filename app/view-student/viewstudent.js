@@ -200,7 +200,7 @@ function studentMeetingsController($scope, $http, $window, MeetingsViewHandler, 
             url: 'http://localhost:8000/student/' + studentID + '/participation/' + ($scope.cancelParticipation.id),
             headers: {'Content-Type': 'application/json', 'Authorization': $localStorage.auth}
         }).then(function (data) {
-            $window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+            $window.location.href = 'http://localhost:80/frontend_new/app/view-student/viewstudent.html';
             $scope.isDataLoaded = true;
         });
     }
