@@ -12,9 +12,9 @@ angular
 
 function meetingsViewHandler() {
     function isParticipateable(aMeeting) {
-        return (aMeeting.cancelled !== 1
-            && aMeeting.unoccupiedSlots !== 0
-            && aMeeting.has_passed !== 1);
+        return (aMeeting.cancelled != 1
+            && aMeeting.unoccupiedSlots != 0
+            && aMeeting.has_passed != 1);
     }
 
     return {
