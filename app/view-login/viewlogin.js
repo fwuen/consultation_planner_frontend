@@ -32,10 +32,10 @@ function loginController($scope, $localStorage, $http) {
                 $localStorage.auth = response.headers('Authorization');
                 var token = $localStorage.auth;
                 if (token.charAt(50) === 's') {
-                    window.location.href = 'http://localhost:63342/frontend_new/app/view-student/viewstudent.html';
+                    window.location.href = 'http://localhost:80/frontend_new/app/view-student/viewstudent.html';
                 }
                 else {
-                    window.location.href = 'http://localhost:63342/frontend_new/app/view-docent/viewdocent.html';
+                    window.location.href = 'http://localhost:80/frontend_new/app/view-docent/viewdocent.html';
                 }
             }
         );
